@@ -66,6 +66,8 @@ def projectile_range(v0, g=9.81):
 projectile_range(v0=20)
 ```
 
+[test link](https://colab.research.google.com/drive/1RypXPOoGDydAR1Bak4hvKc78ZD-JzsHL?usp=sharing)
+
 ## **V0=20**
 ![alt text](image.png)
 
