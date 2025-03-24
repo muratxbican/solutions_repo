@@ -91,6 +91,9 @@ This graph illustrates how the horizontal range of a projectile depends on the l
 This helps in understanding how objects like balls, bullets, or rockets behave when launched at different speeds and angles. 🚀  
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+
 def projectile_range_multi_v0(v0_list, g=9.81):
     angles = np.linspace(0, 90, 100)
     angles_rad = np.radians(angles)
@@ -130,6 +133,9 @@ This graph helps understand how the same projectile behaves differently in vario
 
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+
 def projectile_range_multi_g(v0=20, g_values=[9.81, 1.62, 24.79]):
     angles = np.linspace(0, 90, 100)
     angles_rad = np.radians(angles)
