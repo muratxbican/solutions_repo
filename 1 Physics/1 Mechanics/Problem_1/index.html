@@ -255,9 +255,8 @@ def projectile_range(v0=20, g=9.81):
     plt.figure(figsize=(8, 5))
     plt.plot(angles, ranges, label=f'v₀ = {v0} m/s')
 
-    # Maksimum noktayı işaretle (45°)
     max_range = (v0**2 * np.sin(np.radians(90))) / g
-    plt.plot(45, max_range, 'ro')  # kırmızı nokta
+    plt.plot(45, max_range, 'ro')  
     plt.annotate(f'Max: {max_range:.1f} m', xy=(45, max_range),
                  xytext=(50, max_range + 5), arrowprops=dict(arrowstyle="-&gt;"))
 
@@ -272,6 +271,7 @@ def projectile_range(v0=20, g=9.81):
 projectile_range()
 </code></pre>
 <p><img alt="alt text" src="../image-4.png"/></p>
+<p><em>Figure 1: Horizontal range vs. launch angle for a projectile with v₀ = 20 m/s. Maximum range occurs at 45°.</em></p>
 <h2 id="explanation-of-the-graph"><strong>Explanation of the Graph</strong></h2>
 <p>This graph illustrates how the horizontal range of a projectile depends on the launch angle for different initial velocities (<span class="arithmatex">\( v_0 \)</span>).  </p>
 <ul>
@@ -310,6 +310,7 @@ def projectile_range_multi_v0(v0_list, g=9.81):
 projectile_range_multi_v0([10, 20, 30, 40])
 </code></pre>
 <p><img alt="alt text" src="../image-5.png"/></p>
+<p><em>Figure 2: Horizontal range vs. launch angle for different initial velocities. Higher v₀ increases the range, and the maximum always occurs at 45°.</em></p>
 <h2 id="explanation-of-the-graph_1"><strong>Explanation of the Graph</strong></h2>
 <p>This graph shows how the horizontal range of a projectile changes with the launch angle for different gravitational accelerations (<span class="arithmatex">\(g\)</span>).  </p>
 <ul>
@@ -348,6 +349,7 @@ def projectile_range_multi_g(v0=20, g_values=[9.81, 1.62, 24.79]):
 projectile_range_multi_g()
 </code></pre>
 <p><img alt="alt text" src="../image-6.png"/></p>
+<p><em>Figure 3: Horizontal range vs. launch angle under different gravitational accelerations. Lower gravity leads to longer ranges; maximum always at 45°.</em></p>
 <h2 id="5-frequently-asked-questions-faq"><strong>5. Frequently Asked Questions (FAQ)</strong></h2>
 <h3 id="1-at-what-angle-is-the-maximum-range-achieved-in-projectile-motion"><strong>1. At what angle is the maximum range achieved in projectile motion?</strong></h3>
 <ul>
