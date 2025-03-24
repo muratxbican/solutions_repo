@@ -104,7 +104,6 @@ def projectile_range_multi_v0(v0_list, g=9.81):
         ranges = (v0**2 * np.sin(2 * angles_rad)) / g
         plt.plot(angles, ranges, label=f'v₀ = {v0} m/s')
 
-        # Her v₀ için maksimum noktayı işaretle
         max_range = (v0**2 * np.sin(np.radians(90))) / g
         plt.plot(45, max_range, 'o')  # Nokta koy
         plt.annotate(f'{max_range:.1f} m', xy=(45, max_range),
@@ -150,7 +149,6 @@ def projectile_range_multi_g(v0=20, g_values=[9.81, 1.62, 24.79]):
         ranges = (v0**2 * np.sin(2 * angles_rad)) / g
         plt.plot(angles, ranges, label=label)
 
-        # Maksimum noktayı göster
         max_range = (v0**2 * np.sin(np.radians(90))) / g
         plt.plot(45, max_range, 'o')
         plt.annotate(f'{max_range:.1f} m', xy=(45, max_range),
