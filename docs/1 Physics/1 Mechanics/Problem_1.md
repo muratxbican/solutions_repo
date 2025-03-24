@@ -60,9 +60,8 @@ def projectile_range(v0=20, g=9.81):
     plt.figure(figsize=(8, 5))
     plt.plot(angles, ranges, label=f'v₀ = {v0} m/s')
 
-    # Maksimum noktayı işaretle (45°)
     max_range = (v0**2 * np.sin(np.radians(90))) / g
-    plt.plot(45, max_range, 'ro')  # kırmızı nokta
+    plt.plot(45, max_range, 'ro')  
     plt.annotate(f'Max: {max_range:.1f} m', xy=(45, max_range),
                  xytext=(50, max_range + 5), arrowprops=dict(arrowstyle="->"))
 
@@ -77,6 +76,8 @@ def projectile_range(v0=20, g=9.81):
 projectile_range()
 ```
 ![alt text](image-4.png)
+
+*Figure 1: Horizontal range vs. launch angle for a projectile with v₀ = 20 m/s. Maximum range occurs at 45°.*
 
 
 ## **Explanation of the Graph**  
@@ -121,6 +122,9 @@ projectile_range_multi_v0([10, 20, 30, 40])
 ```
 
 ![alt text](image-5.png)
+
+*Figure 2: Horizontal range vs. launch angle for different initial velocities. Higher v₀ increases the range, and the maximum always occurs at 45°.*
+
 ## **Explanation of the Graph**  
 
 This graph shows how the horizontal range of a projectile changes with the launch angle for different gravitational accelerations ($g$).  
@@ -164,6 +168,9 @@ projectile_range_multi_g()
 ```
 
 ![alt text](image-6.png)
+
+*Figure 3: Horizontal range vs. launch angle under different gravitational accelerations. Lower gravity leads to longer ranges; maximum always at 45°.*
+
 ## **5. Frequently Asked Questions (FAQ)**  
 
 ### **1. At what angle is the maximum range achieved in projectile motion?**  
