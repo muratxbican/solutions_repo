@@ -52,30 +52,31 @@ The following Python script simulates projectile motion and plots the range as a
 import numpy as np
 import matplotlib.pyplot as plt
 
-def projectile_range(v0_lıst, g=9.81):
-    angles = np.linspace(0, 90, 100)  # Angle range from 0 to 90 degrees
-    angles_rad = np.radians(angles)  # Convert degrees to radians
-    ranges = (v0**2 * np.sin(2 * angles_rad)) / g  # Compute range
-    
+def projectile_range(v0=20, g=9.81):
+    angles = np.linspace(0, 90, 100)
+    angles_rad = np.radians(angles)
+    ranges = (v0**2 * np.sin(2 * angles_rad)) / g
+
     plt.figure(figsize=(8, 5))
-    plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
+    plt.plot(angles, ranges, label=f'v₀ = {v0} m/s')
+
+    # Maksimum noktayı işaretle (45°)
+    max_range = (v0**2 * np.sin(np.radians(90))) / g
+    plt.plot(45, max_range, 'ro')  # kırmızı nokta
+    plt.annotate(f'Max: {max_range:.1f} m', xy=(45, max_range),
+                 xytext=(50, max_range + 5), arrowprops=dict(arrowstyle="->"))
+
     plt.xlabel("Angle (degrees)")
     plt.ylabel("Range (m)")
-    plt.title("Projectile Range vs. Launch Angle")
+    plt.title("Projectile Range vs. Launch Angle (v₀ = 20 m/s)")
     plt.legend()
-    plt.grid()
+    plt.grid(True)
+    plt.tight_layout()
     plt.show()
 
-
-projectile_range(v0=20)
+projectile_range()
 ```
-
-## **V0=20**
-![alt text](image.png)
-
-## **V0=45(TOP ONE)**
-![alt text](image-1.png)
-
+![alt text](image-4.png)
 
 
 ## **Explanation of the Graph**  
@@ -90,30 +91,33 @@ This graph illustrates how the horizontal range of a projectile depends on the l
 This helps in understanding how objects like balls, bullets, or rockets behave when launched at different speeds and angles. 🚀  
 
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
-
 def projectile_range_multi_v0(v0_list, g=9.81):
     angles = np.linspace(0, 90, 100)
     angles_rad = np.radians(angles)
-    
+
     plt.figure(figsize=(8, 5))
     for v0 in v0_list:
         ranges = (v0**2 * np.sin(2 * angles_rad)) / g
-        plt.plot(angles, ranges, label=f'v0 = {v0} m/s')
-    
+        plt.plot(angles, ranges, label=f'v₀ = {v0} m/s')
+
+        # Her v₀ için maksimum noktayı işaretle
+        max_range = (v0**2 * np.sin(np.radians(90))) / g
+        plt.plot(45, max_range, 'o')  # Nokta koy
+        plt.annotate(f'{max_range:.1f} m', xy=(45, max_range),
+                     xytext=(45, max_range + 2), fontsize=8)
+
     plt.xlabel("Angle (degrees)")
     plt.ylabel("Range (m)")
-    plt.title("Projectile Range vs. Launch Angle for Different v0")
+    plt.title("Projectile Range vs. Launch Angle for Different v₀")
     plt.legend()
-    plt.grid()
+    plt.grid(True)
+    plt.tight_layout()
     plt.show()
 
 projectile_range_multi_v0([10, 20, 30, 40])
 ```
 
-![alt text](image-2.png)
-
+![alt text](image-5.png)
 ## **Explanation of the Graph**  
 
 This graph shows how the horizontal range of a projectile changes with the launch angle for different gravitational accelerations ($g$).  
@@ -126,32 +130,34 @@ This graph helps understand how the same projectile behaves differently in vario
 
 
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
-
 def projectile_range_multi_g(v0=20, g_values=[9.81, 1.62, 24.79]):
     angles = np.linspace(0, 90, 100)
     angles_rad = np.radians(angles)
     g_labels = ["Earth (9.81 m/s²)", "Moon (1.62 m/s²)", "Jupiter (24.79 m/s²)"]
-    
+
     plt.figure(figsize=(8, 5))
     for g, label in zip(g_values, g_labels):
         ranges = (v0**2 * np.sin(2 * angles_rad)) / g
         plt.plot(angles, ranges, label=label)
-    
+
+        # Maksimum noktayı göster
+        max_range = (v0**2 * np.sin(np.radians(90))) / g
+        plt.plot(45, max_range, 'o')
+        plt.annotate(f'{max_range:.1f} m', xy=(45, max_range),
+                     xytext=(45, max_range + 2), fontsize=8)
+
     plt.xlabel("Angle (degrees)")
     plt.ylabel("Range (m)")
     plt.title("Projectile Range vs. Launch Angle for Different Gravities")
     plt.legend()
-    plt.grid()
+    plt.grid(True)
+    plt.tight_layout()
     plt.show()
 
 projectile_range_multi_g()
-
 ```
 
-![alt text](image-3.png)
-
+![alt text](image-6.png)
 ## **5. Frequently Asked Questions (FAQ)**  
 
 ### **1. At what angle is the maximum range achieved in projectile motion?**  
