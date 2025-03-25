@@ -11,11 +11,15 @@ $$v_{0x} = v_0 \cos(\theta)$$
 $$v_{0y} = v_0 \sin(\theta)$$
 
 Using the kinematic equations, the motion in each direction is governed by:
+
 - **Horizontal motion (constant velocity, no acceleration in the ideal case):**
-  $$x = v_{0x} t = v_0 \cos(\theta) t$$
+
+$$x = v_{0x} t = v_0 \cos(\theta) t$$
+
 - **Vertical motion (accelerated due to gravity):**
-  $$y = v_{0y} t - \frac{1}{2} g t^2$$
-.
+
+$$y = v_{0y} t - \frac{1}{2} g t^2$$
+
 where:
 
 - $g$ is the acceleration due to gravity $(9.81 \text{ m/s}^2)$
