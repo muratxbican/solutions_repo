@@ -15,7 +15,7 @@ Using the kinematic equations, the motion in each direction is governed by:
   $$x = v_{0x} t = v_0 \cos(\theta) t$$
 - **Vertical motion (accelerated due to gravity):**
   $$y = v_{0y} t - \frac{1}{2} g t^2$$
-
+.
 where:
 
 - $g$ is the acceleration due to gravity $(9.81 \text{ m/s}^2)$
