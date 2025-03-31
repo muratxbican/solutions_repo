@@ -177,6 +177,8 @@ plt.grid(True)
 plt.show()
 ```
 
+![alt text](image-18.png)
+
 ---
 
 ## 7. Lyapunov Exponent Estimation
@@ -213,6 +215,8 @@ plt.ylabel("Lyapunov Exponent")
 plt.grid(True)
 plt.show()
 ```
+
+![alt text](image-19.png)
 
 ---
 
