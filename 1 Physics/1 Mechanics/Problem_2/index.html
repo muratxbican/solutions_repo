@@ -68,11 +68,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#5-additional-visualization-energy-over-time">5. Additional Visualization: Energy Over Time</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#6-exploring-parameters">6. Exploring Parameters</a>
+<li class="toctree-l3"><a class="reference internal" href="#6-bifurcation-diagram">6. Bifurcation Diagram</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#7-real-world-applications">7. Real-World Applications</a>
+<li class="toctree-l3"><a class="reference internal" href="#7-lyapunov-exponent-estimation">7. Lyapunov Exponent Estimation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#8-model-limitations-and-extensions">8. Model Limitations and Extensions</a>
+<li class="toctree-l3"><a class="reference internal" href="#8-exploring-parameters">8. Exploring Parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#9-real-world-applications">9. Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#10-model-limitations-and-extensions">10. Model Limitations and Extensions</a>
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#possible-extensions">Possible Extensions</a>
 </li>
@@ -263,7 +267,7 @@ plt.grid(True)
 plt.legend()
 plt.show()
 </code></pre>
-<p><img alt="alt text" src="../image-10.png"/></p>
+<p><img alt="alt text" src="../image-14.png"/></p>
 <hr/>
 <h2 id="3-phase-space-vs">3. Phase Space (θ vs ω)</h2>
 <p>This plot helps visualize how the system evolves in state space.</p>
@@ -275,7 +279,7 @@ plt.ylabel('Angular Velocity ω (rad/s)')
 plt.grid(True)
 plt.show()
 </code></pre>
-<h2 id="_1"><img alt="alt text" src="../image-11.png"/></h2>
+<h2 id="_1"><img alt="alt text" src="../image-15.png"/></h2>
 <h2 id="4-poincare-section">4. Poincaré Section</h2>
 <p>The Poincaré section samples the system once per driving cycle, helping identify periodicity and chaos.</p>
 <pre><code class="language-python">T = 2 * np.pi / omega_drive
@@ -296,7 +300,7 @@ plt.ylabel('Angular Velocity (rad/s)')
 plt.grid(True)
 plt.show()
 </code></pre>
-<p><img alt="alt text" src="../image-12.png"/></p>
+<p><img alt="alt text" src="../image-16.png"/></p>
 <hr/>
 <h2 id="5-additional-visualization-energy-over-time">5. Additional Visualization: Energy Over Time</h2>
 <p>Visualizing total mechanical energy shows how damping and driving force interact.</p>
@@ -319,15 +323,66 @@ plt.ylabel('Energy (J)')
 plt.grid(True)
 plt.show()
 </code></pre>
-<p><img alt="alt text" src="../image-13.png"/></p>
 <hr/>
-<h2 id="6-exploring-parameters">6. Exploring Parameters</h2>
+<h2 id="6-bifurcation-diagram">6. Bifurcation Diagram</h2>
+<p>Explore how the long-term behavior changes with the driving amplitude A.</p>
+<pre><code class="language-python">bifurcation_A = np.linspace(1.0, 1.5, 300)
+steady_states = []
+
+for A_val in bifurcation_A:
+    sol = solve_ivp(pendulum, [0, 200], [0.1, 0.0], t_eval=np.linspace(150, 200, 500), args=(gamma, omega0, A_val, omega_drive))
+    theta_vals = sol.y[0] % (2 * np.pi)
+    steady_states.append((np.full_like(theta_vals, A_val), theta_vals))
+
+plt.figure(figsize=(10, 6))
+for A_vals, thetas in steady_states:
+    plt.plot(A_vals, thetas, ',k', alpha=0.5)
+plt.title("Bifurcation Diagram (A vs θ)")
+plt.xlabel("Driving Amplitude A")
+plt.ylabel("θ mod 2π")
+plt.grid(True)
+plt.show()
+</code></pre>
+<hr/>
+<h2 id="7-lyapunov-exponent-estimation">7. Lyapunov Exponent Estimation</h2>
+<p>Estimate the largest Lyapunov exponent to determine chaos.</p>
+<pre><code class="language-python">def estimate_lyapunov(delta0=1e-8, T_max=100):
+    y1 = np.array([0.1, 0.0])
+    y2 = y1 + np.array([delta0, 0])
+    times = np.linspace(0, T_max, 10000)
+    d_list = []
+
+    for t in range(len(times) - 1):
+        sol1 = solve_ivp(pendulum, [times[t], times[t+1]], y1, t_eval=[times[t+1]], args=(gamma, omega0, A, omega_drive))
+        sol2 = solve_ivp(pendulum, [times[t], times[t+1]], y2, t_eval=[times[t+1]], args=(gamma, omega0, A, omega_drive))
+
+        y1 = sol1.y[:, -1]
+        y2 = sol2.y[:, -1]
+
+        delta = np.linalg.norm(y2 - y1)
+        d_list.append(np.log(delta / delta0))
+        y2 = y1 + delta0 * (y2 - y1) / delta  # Renormalize
+
+    return times[1:], np.cumsum(d_list) / np.arange(1, len(d_list)+1)
+
+ltimes, lyap = estimate_lyapunov()
+
+plt.figure(figsize=(8, 4))
+plt.plot(ltimes, lyap)
+plt.title("Estimated Largest Lyapunov Exponent")
+plt.xlabel("Time")
+plt.ylabel("Lyapunov Exponent")
+plt.grid(True)
+plt.show()
+</code></pre>
+<hr/>
+<h2 id="8-exploring-parameters">8. Exploring Parameters</h2>
 <p>Experimenting with parameters leads to different behaviors:
 - Increasing <code>A</code> may cause chaotic motion.
 - Lowering <code>γ</code> shows less damping, leading to longer sustained oscillations.
 - Matching <code>ω</code> with <code>ω₀</code> creates resonance, producing large amplitudes.</p>
 <hr/>
-<h2 id="7-real-world-applications">7. Real-World Applications</h2>
+<h2 id="9-real-world-applications">9. Real-World Applications</h2>
 <ul>
 <li><strong>Energy Harvesters</strong>: Pendulums can convert motion into usable energy.</li>
 <li><strong>Bridge Engineering</strong>: Avoiding resonance in suspension bridges is crucial.</li>
@@ -336,7 +391,7 @@ plt.show()
 <li><strong>Clocks</strong>: Pendulum clocks are based on resonance principles.</li>
 </ul>
 <hr/>
-<h2 id="8-model-limitations-and-extensions">8. Model Limitations and Extensions</h2>
+<h2 id="10-model-limitations-and-extensions">10. Model Limitations and Extensions</h2>
 <ul>
 <li>The model assumes ideal sine driving forces.</li>
 <li>Real-world damping is often nonlinear.</li>
