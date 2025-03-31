@@ -76,7 +76,7 @@ plt.legend()
 plt.show()
 ```
 
-![alt text](image-10.png)
+![alt text](image-14.png)
 
 ---
 
@@ -93,7 +93,8 @@ plt.ylabel('Angular Velocity ω (rad/s)')
 plt.grid(True)
 plt.show()
 ```
-![alt text](image-11.png)
+
+![alt text](image-15.png)
 ---
 
 ## 4. Poincaré Section
@@ -120,7 +121,7 @@ plt.grid(True)
 plt.show()
 ```
 
-![alt text](image-12.png)
+![alt text](image-16.png)
 
 ---
 
@@ -149,11 +150,71 @@ plt.grid(True)
 plt.show()
 ```
 
-![alt text](image-13.png)
+---
+
+## 6. Bifurcation Diagram
+
+Explore how the long-term behavior changes with the driving amplitude A.
+
+```python
+bifurcation_A = np.linspace(1.0, 1.5, 300)
+steady_states = []
+
+for A_val in bifurcation_A:
+    sol = solve_ivp(pendulum, [0, 200], [0.1, 0.0], t_eval=np.linspace(150, 200, 500), args=(gamma, omega0, A_val, omega_drive))
+    theta_vals = sol.y[0] % (2 * np.pi)
+    steady_states.append((np.full_like(theta_vals, A_val), theta_vals))
+
+plt.figure(figsize=(10, 6))
+for A_vals, thetas in steady_states:
+    plt.plot(A_vals, thetas, ',k', alpha=0.5)
+plt.title("Bifurcation Diagram (A vs θ)")
+plt.xlabel("Driving Amplitude A")
+plt.ylabel("θ mod 2π")
+plt.grid(True)
+plt.show()
+```
 
 ---
 
-## 6. Exploring Parameters
+## 7. Lyapunov Exponent Estimation
+
+Estimate the largest Lyapunov exponent to determine chaos.
+
+```python
+def estimate_lyapunov(delta0=1e-8, T_max=100):
+    y1 = np.array([0.1, 0.0])
+    y2 = y1 + np.array([delta0, 0])
+    times = np.linspace(0, T_max, 10000)
+    d_list = []
+
+    for t in range(len(times) - 1):
+        sol1 = solve_ivp(pendulum, [times[t], times[t+1]], y1, t_eval=[times[t+1]], args=(gamma, omega0, A, omega_drive))
+        sol2 = solve_ivp(pendulum, [times[t], times[t+1]], y2, t_eval=[times[t+1]], args=(gamma, omega0, A, omega_drive))
+
+        y1 = sol1.y[:, -1]
+        y2 = sol2.y[:, -1]
+
+        delta = np.linalg.norm(y2 - y1)
+        d_list.append(np.log(delta / delta0))
+        y2 = y1 + delta0 * (y2 - y1) / delta  # Renormalize
+
+    return times[1:], np.cumsum(d_list) / np.arange(1, len(d_list)+1)
+
+ltimes, lyap = estimate_lyapunov()
+
+plt.figure(figsize=(8, 4))
+plt.plot(ltimes, lyap)
+plt.title("Estimated Largest Lyapunov Exponent")
+plt.xlabel("Time")
+plt.ylabel("Lyapunov Exponent")
+plt.grid(True)
+plt.show()
+```
+
+---
+
+## 8. Exploring Parameters
 
 Experimenting with parameters leads to different behaviors:
 - Increasing `A` may cause chaotic motion.
@@ -162,7 +223,7 @@ Experimenting with parameters leads to different behaviors:
 
 ---
 
-## 7. Real-World Applications
+## 9. Real-World Applications
 
 - **Energy Harvesters**: Pendulums can convert motion into usable energy.
 - **Bridge Engineering**: Avoiding resonance in suspension bridges is crucial.
@@ -172,7 +233,7 @@ Experimenting with parameters leads to different behaviors:
 
 ---
 
-## 8. Model Limitations and Extensions
+## 10. Model Limitations and Extensions
 
 - The model assumes ideal sine driving forces.
 - Real-world damping is often nonlinear.
