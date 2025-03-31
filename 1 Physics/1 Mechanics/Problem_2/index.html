@@ -50,29 +50,31 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Dynamics of a Forced Damped Pendulum</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
+<li class="toctree-l3"><a class="reference internal" href="#motivation">🎯 Motivation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-dynamics">2. Analysis of Dynamics</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#3-python-implementation">3. Python Implementation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#4-phase-space">4. Phase Space</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#5-poincare-section">5. Poincaré Section</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#6-interpretation-and-discussion">6. Interpretation and Discussion</a>
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">📚 1. Theoretical Foundation</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#resonance">Resonance</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#chaos">Chaos</a>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">🧠 Small-Angle Approximation</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#7-applications">7. Applications</a>
+<li class="toctree-l3"><a class="reference internal" href="#2-python-simulation">⚙️ 2. Python Simulation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#8-limitations-and-extensions">8. Limitations and Extensions</a>
+<li class="toctree-l3"><a class="reference internal" href="#3-phase-space">🔁 3. Phase Space</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-poincare-section">🌌 4. Poincaré Section</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-exploring-parameters">📊 5. Exploring Parameters</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#6-real-world-applications">🌍 6. Real-World Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#7-model-limitations-and-extensions">🧪 7. Model Limitations and Extensions</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#possible-extensions">🔄 Possible Extensions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">✅ Summary</a>
 </li>
 </ul>
 </li>
@@ -196,75 +198,76 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<h2 id="motivation">Motivation</h2>
-<p>The forced damped pendulum is an excellent example of a nonlinear dynamical system that exhibits a wide range of behaviors—from periodic motion to chaos. Understanding such systems can help explain real-world phenomena, such as how structures respond to external forces or how energy can be harvested from vibrations.</p>
+<h2 id="motivation">🎯 Motivation</h2>
+<p>The forced damped pendulum is a fascinating example of nonlinear dynamics. It behaves in simple and predictable ways under small forces, but when driven periodically and influenced by damping, it can transition into complex and chaotic motion. This system helps us understand a wide range of natural and engineered systems — from mechanical oscillators to electrical circuits.</p>
 <hr/>
-<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
-<p>The equation of motion for a forced damped pendulum is:</p>
+<h2 id="1-theoretical-foundation">📚 1. Theoretical Foundation</h2>
+<p>The general equation for a forced damped pendulum is:</p>
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \sin\theta = A \cos(\omega t)
 \]</div>
 <p>Where:
-- <span class="arithmatex">\(\theta\)</span> is the angle,
-- <span class="arithmatex">\(\gamma\)</span> is the damping coefficient,
-- <span class="arithmatex">\(\omega_0\)</span> is the natural frequency,
-- <span class="arithmatex">\(A\)</span> is the driving force amplitude,
-- <span class="arithmatex">\(\omega\)</span> is the driving frequency.</p>
-<p>For small angles (<span class="arithmatex">\(\theta \approx \sin\theta\)</span>):</p>
+- <span class="arithmatex">\(\theta\)</span>: angle of the pendulum (radians)
+- <span class="arithmatex">\(\gamma\)</span>: damping coefficient
+- <span class="arithmatex">\(\omega_0\)</span>: natural angular frequency <span class="arithmatex">\(= \sqrt{g / L}\)</span>
+- <span class="arithmatex">\(A\)</span>: amplitude of the external driving force
+- <span class="arithmatex">\(\omega\)</span>: frequency of the external driving force</p>
+<h3 id="small-angle-approximation">🧠 Small-Angle Approximation</h3>
+<p>For small <span class="arithmatex">\(\theta\)</span>, <span class="arithmatex">\(\sin\theta \approx \theta\)</span>, which simplifies the equation to:</p>
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \theta = A \cos(\omega t)
 \]</div>
-<p>This becomes a linear second-order differential equation.</p>
+<p>This linear version is easier to analyze and helps understand phenomena like resonance.</p>
 <hr/>
-<h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
-<p>We will explore how varying <span class="arithmatex">\(\gamma\)</span>, <span class="arithmatex">\(A\)</span>, and <span class="arithmatex">\(\omega\)</span> affects the system.</p>
-<hr/>
-<h2 id="3-python-implementation">3. Python Implementation</h2>
+<h2 id="2-python-simulation">⚙️ 2. Python Simulation</h2>
+<p>Let's simulate the pendulum using Python and visualize its motion.</p>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
-# Equation of motion
+# Differential equation of motion
 def pendulum(t, y, gamma, omega0, A, omega):
     theta, omega_theta = y
     dydt = [omega_theta, -gamma * omega_theta - omega0**2 * np.sin(theta) + A * np.cos(omega * t)]
     return dydt
 
-# Simulation parameters
-gamma = 0.2       # damping
-omega0 = 1.5      # natural frequency
-A = 1.2           # driving force amplitude
-omega_drive = 2.0 # driving frequency
-y0 = [0.1, 0.0]   # initial conditions
-t_span = (0, 50)
-t_eval = np.linspace(t_span[0], t_span[1], 5000)
+# Parameters
+gamma = 0.2         # damping
+omega0 = 1.5        # natural frequency
+A = 1.2             # driving amplitude
+omega_drive = 2.0   # driving frequency
 
-# Solve the ODE
+y0 = [0.1, 0.0]     # initial angle and angular velocity
+t_span = (0, 50)
+t_eval = np.linspace(*t_span, 5000)
+
+# Solve the system
 sol = solve_ivp(pendulum, t_span, y0, t_eval=t_eval, args=(gamma, omega0, A, omega_drive))
 
-# Plot the results
+# Plot angle vs time
 plt.figure(figsize=(10, 4))
-plt.plot(sol.t, sol.y[0])
-plt.title('Forced Damped Pendulum Motion')
+plt.plot(sol.t, sol.y[0], label='Angle (θ)')
+plt.title('Forced Damped Pendulum: Angle vs Time')
 plt.xlabel('Time (s)')
 plt.ylabel('Angle (rad)')
 plt.grid(True)
+plt.legend()
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="4-phase-space">4. Phase Space</h2>
-<pre><code class="language-python"># Phase space plot
+<h2 id="3-phase-space">🔁 3. Phase Space</h2>
+<pre><code class="language-python"># Plot phase diagram
 plt.figure(figsize=(6, 6))
-plt.plot(sol.y[0], sol.y[1], lw=0.5)
-plt.title('Phase Space')
-plt.xlabel('Angle (rad)')
-plt.ylabel('Angular Velocity (rad/s)')
+plt.plot(sol.y[0], sol.y[1], lw=0.7)
+plt.title('Phase Space: Angular Velocity vs Angle')
+plt.xlabel('Angle θ (rad)')
+plt.ylabel('Angular Velocity ω (rad/s)')
 plt.grid(True)
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="5-poincare-section">5. Poincaré Section</h2>
-<pre><code class="language-python"># Take stroboscopic points at every period of the driving force
+<h2 id="4-poincare-section">🌌 4. Poincaré Section</h2>
+<pre><code class="language-python"># Time intervals at which to sample (stroboscopic view)
 T = 2 * np.pi / omega_drive
 poincare_times = np.arange(0, t_span[1], T)
 poincare_points = []
@@ -275,36 +278,52 @@ for t_p in poincare_times:
 
 poincare_points = np.array(poincare_points)
 
+# Plot
 plt.figure(figsize=(6, 6))
-plt.scatter(poincare_points[:, 0], poincare_points[:, 1], s=10, color='red')
+plt.scatter(poincare_points[:, 0], poincare_points[:, 1], s=10, color='crimson')
 plt.title('Poincaré Section')
-plt.xlabel('Angle mod $2\pi$')
-plt.ylabel('Angular Velocity')
+plt.xlabel('θ mod $2\pi$ (rad)')
+plt.ylabel('Angular Velocity (rad/s)')
 plt.grid(True)
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="6-interpretation-and-discussion">6. Interpretation and Discussion</h2>
-<h3 id="resonance">Resonance</h3>
-<p>At certain driving frequencies, the system can resonate, leading to large amplitude oscillations. This is critical in engineering as it can cause systems to fail.</p>
-<h3 id="chaos">Chaos</h3>
-<p>As the driving amplitude increases, or damping is reduced, the system can behave chaotically, showing extreme sensitivity to initial conditions.</p>
+<h2 id="5-exploring-parameters">📊 5. Exploring Parameters</h2>
+<p>Try changing these values to see how the system behaves:
+- Increase <code>A</code> to observe chaos.
+- Decrease <code>γ</code> to reduce damping.
+- Set <code>ω ≈ ω₀</code> to observe resonance.</p>
+<p>This reveals how delicate and rich the system's response is.</p>
 <hr/>
-<h2 id="7-applications">7. Applications</h2>
+<h2 id="6-real-world-applications">🌍 6. Real-World Applications</h2>
 <ul>
-<li><strong>Energy Harvesting</strong>: Using pendulum-like systems to convert vibration into electrical energy.</li>
-<li><strong>Suspension Bridges</strong>: Understanding resonance is essential to prevent collapse (e.g., Tacoma Narrows Bridge).</li>
-<li><strong>Oscillating Circuits</strong>: Analogy with RLC circuits under AC driving forces.</li>
+<li><strong>Energy Harvesters</strong>: Devices that extract power from vibration.</li>
+<li><strong>Suspension Bridges</strong>: Preventing resonance avoids structural failure.</li>
+<li><strong>Washing Machines</strong>: Reduce unbalanced vibrations via damping.</li>
+<li><strong>RLC Circuits</strong>: Analogous systems in electronics.</li>
 </ul>
 <hr/>
-<h2 id="8-limitations-and-extensions">8. Limitations and Extensions</h2>
+<h2 id="7-model-limitations-and-extensions">🧪 7. Model Limitations and Extensions</h2>
 <ul>
-<li><strong>Nonlinear damping</strong>: Real-world damping may not be linear.</li>
-<li><strong>Non-periodic driving</strong>: Real forces can be irregular.</li>
-<li><strong>3D pendulums</strong>: More degrees of freedom introduce richer behavior.</li>
+<li>✅ Uses idealized sine driving force.</li>
+<li>❌ Doesn't include nonlinear damping (e.g., air resistance at high speeds).</li>
+<li>❌ Doesn't account for 3D movement.</li>
+</ul>
+<h3 id="possible-extensions">🔄 Possible Extensions</h3>
+<ul>
+<li>Non-periodic or random driving forces</li>
+<li>Double pendulum (coupled chaos)</li>
+<li>Bifurcation diagrams to map parameter space</li>
 </ul>
 <hr/>
-<p>This notebook offers a blend of theoretical, numerical, and graphical analysis, providing an accessible but thorough exploration of the forced damped pendulum system.</p>
+<h2 id="summary">✅ Summary</h2>
+<p>This project showed how a simple mechanical system can exhibit complex dynamics. Using Python, we:
+- Simulated motion using numerical integration
+- Visualized time evolution, phase space, and Poincaré sections
+- Observed transitions from regular to chaotic behavior</p>
+<p>📌 <em>Learning how systems like this respond to forces is key to physics, engineering, and understanding nature.</em></p>
+<hr/>
+<p>Feel free to change parameters and explore! 🎉</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
