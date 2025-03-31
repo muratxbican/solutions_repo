@@ -76,6 +76,8 @@ plt.legend()
 plt.show()
 ```
 
+![alt text](image-10.png)
+
 ---
 
 ## 3. Phase Space (θ vs ω)
@@ -91,7 +93,7 @@ plt.ylabel('Angular Velocity ω (rad/s)')
 plt.grid(True)
 plt.show()
 ```
-
+![alt text](image-11.png)
 ---
 
 ## 4. Poincaré Section
@@ -117,6 +119,8 @@ plt.ylabel('Angular Velocity (rad/s)')
 plt.grid(True)
 plt.show()
 ```
+
+![alt text](image-12.png)
 
 ---
 
@@ -144,6 +148,8 @@ plt.ylabel('Energy (J)')
 plt.grid(True)
 plt.show()
 ```
+
+![alt text](image-13.png)
 
 ---
 
