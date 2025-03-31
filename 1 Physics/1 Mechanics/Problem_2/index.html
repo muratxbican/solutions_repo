@@ -50,25 +50,25 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Dynamics of a Forced Damped Pendulum</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#motivation">🎯 Motivation</a>
+<li class="toctree-l3"><a class="reference internal" href="#motivation">Motivation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">📚 1. Theoretical Foundation</a>
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">🧠 Small-Angle Approximation</a>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#2-python-simulation">⚙️ 2. Python Simulation</a>
+<li class="toctree-l3"><a class="reference internal" href="#2-python-simulation">2. Python Simulation</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#3-phase-space">🔁 3. Phase Space</a>
+<li class="toctree-l3"><a class="reference internal" href="#3-phase-space">3. Phase Space</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#4-poincare-section">🌌 4. Poincaré Section</a>
+<li class="toctree-l3"><a class="reference internal" href="#4-poincare-section">4. Poincaré Section</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#5-exploring-parameters">📊 5. Exploring Parameters</a>
+<li class="toctree-l3"><a class="reference internal" href="#5-exploring-parameters">5. Exploring Parameters</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#6-real-world-applications">🌍 6. Real-World Applications</a>
+<li class="toctree-l3"><a class="reference internal" href="#6-real-world-applications">6. Real-World Applications</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#7-model-limitations-and-extensions">🧪 7. Model Limitations and Extensions</a>
+<li class="toctree-l3"><a class="reference internal" href="#7-model-limitations-and-extensions">7. Model Limitations and Extensions</a>
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#possible-extensions">🔄 Possible Extensions</a>
 </li>
@@ -198,10 +198,10 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<h2 id="motivation">🎯 Motivation</h2>
+<h2 id="motivation">Motivation</h2>
 <p>The forced damped pendulum is a fascinating example of nonlinear dynamics. It behaves in simple and predictable ways under small forces, but when driven periodically and influenced by damping, it can transition into complex and chaotic motion. This system helps us understand a wide range of natural and engineered systems — from mechanical oscillators to electrical circuits.</p>
 <hr/>
-<h2 id="1-theoretical-foundation">📚 1. Theoretical Foundation</h2>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
 <p>The general equation for a forced damped pendulum is:</p>
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \sin\theta = A \cos(\omega t)
@@ -212,14 +212,14 @@
 - <span class="arithmatex">\(\omega_0\)</span>: natural angular frequency <span class="arithmatex">\(= \sqrt{g / L}\)</span>
 - <span class="arithmatex">\(A\)</span>: amplitude of the external driving force
 - <span class="arithmatex">\(\omega\)</span>: frequency of the external driving force</p>
-<h3 id="small-angle-approximation">🧠 Small-Angle Approximation</h3>
+<h3 id="small-angle-approximation">Small-Angle Approximation</h3>
 <p>For small <span class="arithmatex">\(\theta\)</span>, <span class="arithmatex">\(\sin\theta \approx \theta\)</span>, which simplifies the equation to:</p>
 <div class="arithmatex">\[
 \frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \theta = A \cos(\omega t)
 \]</div>
 <p>This linear version is easier to analyze and helps understand phenomena like resonance.</p>
 <hr/>
-<h2 id="2-python-simulation">⚙️ 2. Python Simulation</h2>
+<h2 id="2-python-simulation">2. Python Simulation</h2>
 <p>Let's simulate the pendulum using Python and visualize its motion.</p>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
@@ -255,7 +255,7 @@ plt.legend()
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="3-phase-space">🔁 3. Phase Space</h2>
+<h2 id="3-phase-space">3. Phase Space</h2>
 <pre><code class="language-python"># Plot phase diagram
 plt.figure(figsize=(6, 6))
 plt.plot(sol.y[0], sol.y[1], lw=0.7)
@@ -266,7 +266,7 @@ plt.grid(True)
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="4-poincare-section">🌌 4. Poincaré Section</h2>
+<h2 id="4-poincare-section">4. Poincaré Section</h2>
 <pre><code class="language-python"># Time intervals at which to sample (stroboscopic view)
 T = 2 * np.pi / omega_drive
 poincare_times = np.arange(0, t_span[1], T)
@@ -288,14 +288,14 @@ plt.grid(True)
 plt.show()
 </code></pre>
 <hr/>
-<h2 id="5-exploring-parameters">📊 5. Exploring Parameters</h2>
+<h2 id="5-exploring-parameters">5. Exploring Parameters</h2>
 <p>Try changing these values to see how the system behaves:
 - Increase <code>A</code> to observe chaos.
 - Decrease <code>γ</code> to reduce damping.
 - Set <code>ω ≈ ω₀</code> to observe resonance.</p>
 <p>This reveals how delicate and rich the system's response is.</p>
 <hr/>
-<h2 id="6-real-world-applications">🌍 6. Real-World Applications</h2>
+<h2 id="6-real-world-applications">6. Real-World Applications</h2>
 <ul>
 <li><strong>Energy Harvesters</strong>: Devices that extract power from vibration.</li>
 <li><strong>Suspension Bridges</strong>: Preventing resonance avoids structural failure.</li>
@@ -303,7 +303,7 @@ plt.show()
 <li><strong>RLC Circuits</strong>: Analogous systems in electronics.</li>
 </ul>
 <hr/>
-<h2 id="7-model-limitations-and-extensions">🧪 7. Model Limitations and Extensions</h2>
+<h2 id="7-model-limitations-and-extensions">7. Model Limitations and Extensions</h2>
 <ul>
 <li>✅ Uses idealized sine driving force.</li>
 <li>❌ Doesn't include nonlinear damping (e.g., air resistance at high speeds).</li>
