@@ -251,11 +251,7 @@ Experimenting with parameters leads to different behaviors:
 - Study bifurcation diagrams over varying A or ω.
 - Simulate coupled or double pendulums.
 
----
 
-## Summary
-
-This project demonstrates the rich behavior of a driven damped pendulum, from predictable motion to chaos. By simulating and visualizing its response to different parameters, we gain deeper understanding of how simple systems can lead to complex outcomes.
 
 ---
 
