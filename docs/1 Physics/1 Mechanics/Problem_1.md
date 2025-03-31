@@ -173,6 +173,163 @@ projectile_range_multi_g()
 
 *Figure 3: Horizontal range vs. launch angle under different gravitational accelerations. Lower gravity leads to longer ranges; maximum always at 45°.*
 
+##  Explanation of the Graph
+
+This graph demonstrates how the **initial height** ($y_0$) affects the projectile's motion.
+
+- Each curve represents a projectile launched from a different height.
+- The **higher** the starting point, the **longer** the projectile stays in the air.
+- Longer airtime results in a **greater horizontal range**.
+- This effect is especially noticeable when launching from elevated positions (e.g., a cliff, a tower).
+
+This concept is useful in real-world scenarios like launching missiles from elevated platforms or analyzing sports trajectories like basketball shots from different angles. 🏀
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def trajectory(v0, angle_deg, y0=0, g=9.81):
+    angle_rad = np.radians(angle_deg)
+    vy0 = v0 * np.sin(angle_rad)
+    t_flight = (vy0 + np.sqrt(vy0**2 + 2 * g * y0)) / g
+    t = np.linspace(0, t_flight, 500)
+    x = v0 * np.cos(angle_rad) * t
+    y = y0 + vy0 * t - 0.5 * g * t**2
+    return x, y
+
+v0 = 25
+angle = 45
+heights = [0, 10, 50]
+
+plt.figure(figsize=(10, 6))
+for h in heights:
+    x, y = trajectory(v0, angle, y0=h)
+    plt.plot(x, y, label=f'Initial height = {h} m')
+
+plt.title("Projectile Motion from Different Heights (v₀ = 25 m/s, θ = 45°)")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Height (m)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+![alt text](image-7.png)
+
+Figure 4: Trajectories of projectiles launched from different heights (0 m, 10 m, 50 m) at 45° and 25 m/s.
+
+## Explanation of the Graph
+
+This graph compares **projectile motion with and without air resistance**.
+
+- The **red curve** shows the ideal case (no air resistance).
+- The **blue dashed curve** includes air resistance.
+- With air resistance, the projectile **does not travel as far** and has a **flatter arc**.
+- The effect of air resistance becomes more noticeable at higher speeds.
+
+This comparison is essential in real-world applications like ballistics, sports, and aerospace engineering, where air drag cannot be ignored. ✈️
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def trajectory(v0, angle_deg, y0=0, g=9.81):
+    angle_rad = np.radians(angle_deg)
+    vy0 = v0 * np.sin(angle_rad)
+    t_flight = (vy0 + np.sqrt(vy0**2 + 2 * g * y0)) / g
+    t = np.linspace(0, t_flight, 500)
+    x = v0 * np.cos(angle_rad) * t
+    y = y0 + vy0 * t - 0.5 * g * t**2
+    return x, y
+
+def trajectory_with_air_resistance(v0, angle_deg, y0=0, g=9.81, k=0.05, dt=0.01):
+    angle_rad = np.radians(angle_deg)
+    vx = v0 * np.cos(angle_rad)
+    vy = v0 * np.sin(angle_rad)
+    x, y = 0, y0
+    X, Y = [x], [y]
+
+    while y >= 0:
+        ax = -k * vx
+        ay = -g - k * vy
+        vx += ax * dt
+        vy += ay * dt
+        x += vx * dt
+        y += vy * dt
+        X.append(x)
+        Y.append(y)
+    return X, Y
+
+v0 = 25
+angle = 45
+
+x1, y1 = trajectory(v0, angle)
+x2, y2 = trajectory_with_air_resistance(v0, angle)
+
+plt.figure(figsize=(10, 6))
+plt.plot(x1, y1, label='No Air Resistance', color='red')
+plt.plot(x2, y2, '--', label='With Air Resistance', color='blue')
+
+plt.title("Projectile Motion: With vs. Without Air Resistance (v₀ = 25 m/s, θ = 45°)")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Height (m)")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+```
+
+![alt text](image-8.png)
+
+Figure 5: Comparison of trajectories with and without air resistance.
+
+
+## 🎯 Trajectory Comparison for Different Launch Angles (v₀ = 25 m/s)
+
+This graph shows how the launch angle affects the **trajectory shape** and **horizontal distance** when the **initial velocity is fixed** at 25 m/s.
+
+- All projectiles are launched from the same height and speed.
+- Angles used: **15°, 39°, 45°, and 60°**
+- The **longest range** is achieved at **45°**.
+- Higher angles result in **higher but shorter** trajectories.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def trajectory(v0, angle_deg, y0=0, g=9.81):
+    angle_rad = np.radians(angle_deg)
+    vy0 = v0 * np.sin(angle_rad)
+    t_flight = (vy0 + np.sqrt(vy0**2 + 2 * g * y0)) / g
+    t = np.linspace(0, t_flight, 500)
+    x = v0 * np.cos(angle_rad) * t
+    y = y0 + vy0 * t - 0.5 * g * t**2
+    return x, y
+
+# Parameters
+v0 = 25
+angles = [15, 39, 45, 60]
+
+plt.figure(figsize=(10, 6))
+for angle in angles:
+    x, y = trajectory(v0, angle)
+    plt.plot(x, y, label=f'{angle}°')
+
+plt.title("Projectile Trajectories at Different Angles (v₀ = 25 m/s)")
+plt.xlabel("Horizontal Distance (m)")
+plt.ylabel("Vertical Height (m)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+![alt text](image-9.png)
+
+Figure 6: Trajectories for different launch angles at fixed speed (v₀ = 25 m/s).
+
+
+
 ## **5. Frequently Asked Questions (FAQ)**  
 
 ### **1. At what angle is the maximum range achieved in projectile motion?**  
