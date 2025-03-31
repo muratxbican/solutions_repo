@@ -1,12 +1,12 @@
 # Investigating the Dynamics of a Forced Damped Pendulum
 
-## 🎯 Motivation
+##  Motivation
 
 The forced damped pendulum is a fascinating example of nonlinear dynamics. It behaves in simple and predictable ways under small forces, but when driven periodically and influenced by damping, it can transition into complex and chaotic motion. This system helps us understand a wide range of natural and engineered systems — from mechanical oscillators to electrical circuits.
 
 ---
 
-## 📚 1. Theoretical Foundation
+##  1. Theoretical Foundation
 
 The general equation for a forced damped pendulum is:
 
@@ -21,7 +21,7 @@ Where:
 - $A$: amplitude of the external driving force
 - $\omega$: frequency of the external driving force
 
-### 🧠 Small-Angle Approximation
+###  Small-Angle Approximation
 For small $\theta$, $\sin\theta \approx \theta$, which simplifies the equation to:
 
 $$
@@ -32,7 +32,7 @@ This linear version is easier to analyze and helps understand phenomena like res
 
 ---
 
-## ⚙️ 2. Python Simulation
+##  2. Python Simulation
 
 Let's simulate the pendulum using Python and visualize its motion.
 
@@ -73,7 +73,7 @@ plt.show()
 
 ---
 
-## 🔁 3. Phase Space
+##  3. Phase Space
 
 ```python
 # Plot phase diagram
@@ -88,7 +88,7 @@ plt.show()
 
 ---
 
-## 🌌 4. Poincaré Section
+##  4. Poincaré Section
 
 ```python
 # Time intervals at which to sample (stroboscopic view)
@@ -114,7 +114,7 @@ plt.show()
 
 ---
 
-## 📊 5. Exploring Parameters
+##  5. Exploring Parameters
 
 Try changing these values to see how the system behaves:
 - Increase `A` to observe chaos.
@@ -125,7 +125,7 @@ This reveals how delicate and rich the system's response is.
 
 ---
 
-## 🌍 6. Real-World Applications
+##  6. Real-World Applications
 
 - **Energy Harvesters**: Devices that extract power from vibration.
 - **Suspension Bridges**: Preventing resonance avoids structural failure.
@@ -134,7 +134,7 @@ This reveals how delicate and rich the system's response is.
 
 ---
 
-## 🧪 7. Model Limitations and Extensions
+##  7. Model Limitations and Extensions
 
 - ✅ Uses idealized sine driving force.
 - ❌ Doesn't include nonlinear damping (e.g., air resistance at high speeds).
