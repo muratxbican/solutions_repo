@@ -27,7 +27,8 @@ where:
 
 ### **1.2 Time of Flight**
 
-The time of flight is determined by solving for when the projectile returns to the ground $(y = 0)$:
+The time of flight is determined by solving for when the projectile returns to the ground 
+$(y = 0)$:
 $$t = \frac{2 v_0 \sin(\theta)}{g}$$
 
 ### **1.3 Range Equation**
