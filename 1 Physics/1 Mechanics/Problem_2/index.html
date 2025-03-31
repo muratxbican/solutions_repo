@@ -62,6 +62,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#3-phase-space-vs">3. Phase Space (θ vs ω)</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#4-poincare-section">4. Poincaré Section</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#5-additional-visualization-energy-over-time">5. Additional Visualization: Energy Over Time</a>
@@ -261,6 +263,7 @@ plt.grid(True)
 plt.legend()
 plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-10.png"/></p>
 <hr/>
 <h2 id="3-phase-space-vs">3. Phase Space (θ vs ω)</h2>
 <p>This plot helps visualize how the system evolves in state space.</p>
@@ -272,7 +275,7 @@ plt.ylabel('Angular Velocity ω (rad/s)')
 plt.grid(True)
 plt.show()
 </code></pre>
-<hr/>
+<h2 id="_1"><img alt="alt text" src="../image-11.png"/></h2>
 <h2 id="4-poincare-section">4. Poincaré Section</h2>
 <p>The Poincaré section samples the system once per driving cycle, helping identify periodicity and chaos.</p>
 <pre><code class="language-python">T = 2 * np.pi / omega_drive
@@ -293,6 +296,7 @@ plt.ylabel('Angular Velocity (rad/s)')
 plt.grid(True)
 plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-12.png"/></p>
 <hr/>
 <h2 id="5-additional-visualization-energy-over-time">5. Additional Visualization: Energy Over Time</h2>
 <p>Visualizing total mechanical energy shows how damping and driving force interact.</p>
@@ -315,6 +319,7 @@ plt.ylabel('Energy (J)')
 plt.grid(True)
 plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-13.png"/></p>
 <hr/>
 <h2 id="6-exploring-parameters">6. Exploring Parameters</h2>
 <p>Experimenting with parameters leads to different behaviors:
