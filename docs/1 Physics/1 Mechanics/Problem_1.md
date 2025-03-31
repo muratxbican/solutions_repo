@@ -346,3 +346,14 @@ Figure 6: Trajectories for different launch angles at fixed speed (v₀ = 25 m/s
 
 ### **5. How does air resistance impact projectile motion?**  
 - Air resistance **reduces the range** by slowing down the projectile and changing its trajectory, making the optimal launch angle lower than 45°.
+
+## ✅ Checklist: Teacher's Suggestions Implemented
+
+| Suggestion                                                                 | Status  | Location in Project |
+|----------------------------------------------------------------------------|---------|----------------------|
+| 3 different velocities (v₀) at same angle, showing range comparison        | ✔️ Done | *Figure 2* – `projectile_range_multi_v0` |
+| 3 different planets (different gravity values) with same initial velocity  | ✔️ Done | *Figure 3* – `projectile_range_multi_g` |
+| Launching from different heights                                           | ✔️ Done | *Figure 4* – `heights = [0, 10, 50]` |
+| Same speed with different angles (15°, 39°, 45°, 60°)                      | ✔️ Done | *Figure 6* – `angles = [15, 39, 45, 60]` |
+| Comparison between with and without air resistance                        | ✔️ Done | *Figure 5* – `trajectory_with_air_resistance()` |
+
