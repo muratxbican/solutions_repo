@@ -150,6 +150,8 @@ plt.grid(True)
 plt.show()
 ```
 
+![alt text](image-17.png)
+
 ---
 
 ## 6. Bifurcation Diagram
