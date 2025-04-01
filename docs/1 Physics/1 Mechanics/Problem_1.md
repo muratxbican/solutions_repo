@@ -1,6 +1,40 @@
 # **Problem 1: Investigating the Range as a Function of the Angle of Projection**
 
 ## **1. Theoretical Foundation**
+
+### 1.0 Starting from Newton's Second Law
+
+Projectile motion can be derived from Newton’s Second Law:
+
+\[
+\vec{F} = m \vec{a}
+\]
+
+In the absence of air resistance, the only force acting on the projectile is gravity, acting in the vertical direction:
+
+\[
+\vec{a} = \begin{bmatrix} 0 \\ -g \end{bmatrix}
+\]
+
+This leads to the second-order differential equations:
+
+- Horizontal motion:  
+\[
+\frac{d^2x}{dt^2} = 0
+\Rightarrow \frac{dx}{dt} = v_{0x} = v_0 \cos(\theta)
+\Rightarrow x(t) = v_0 \cos(\theta) \cdot t
+\]
+
+- Vertical motion:  
+\[
+\frac{d^2y}{dt^2} = -g
+\Rightarrow \frac{dy}{dt} = v_0 \sin(\theta) - g t
+\Rightarrow y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2
+\]
+
+These equations form the theoretical foundation of projectile motion and will be used to derive further quantities such as the time of flight, range, and trajectory.
+
+
 Projectile motion is a type of two-dimensional motion where an object is launched into the air with an initial velocity $v_0$ at an angle $\theta$ relative to the horizontal. The motion can be analyzed by breaking it into horizontal (x) and vertical (y) components.
 
 ### **1.1 Equations of Motion**
