@@ -26,12 +26,14 @@ $$
 $$
 
 
+
 - Vertical motion:  
 $$
 \frac{d^2y}{dt^2} = -g
 \Rightarrow \frac{dy}{dt} = v_0 \sin(\theta) - g t
 \Rightarrow y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2
 $$
+
 
 These equations form the theoretical foundation of projectile motion and will be used to derive further quantities such as the time of flight, range, and trajectory.
 
