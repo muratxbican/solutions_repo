@@ -50,6 +50,8 @@
 <ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
 <ul>
+<li class="toctree-l4"><a class="reference internal" href="#10-starting-from-newtons-second-law">1.0 Starting from Newton's Second Law</a>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#11-equations-of-motion">1.1 Equations of Motion</a>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#12-time-of-flight">1.2 Time of Flight</a>
@@ -215,6 +217,35 @@
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1-investigating-the-range-as-a-function-of-the-angle-of-projection"><strong>Problem 1: Investigating the Range as a Function of the Angle of Projection</strong></h1>
 <h2 id="1-theoretical-foundation"><strong>1. Theoretical Foundation</strong></h2>
+<h3 id="10-starting-from-newtons-second-law">1.0 Starting from Newton's Second Law</h3>
+<p>Projectile motion can be derived from Newton’s Second Law:</p>
+<div class="arithmatex">\[
+\vec{F} = m \vec{a}
+\]</div>
+<p>In the absence of air resistance, the only force acting on the projectile is gravity, acting in the vertical direction:</p>
+<div class="arithmatex">\[
+\vec{a} = \begin{bmatrix} 0 \\ -g \end{bmatrix}
+\]</div>
+<p>This leads to the second-order differential equations:</p>
+<ul>
+<li>
+<p>Horizontal motion:<br/>
+[
+\frac{d^2x}{dt^2} = 0
+\Rightarrow \frac{dx}{dt} = v_{0x} = v_0 \cos(\theta)
+\Rightarrow x(t) = v_0 \cos(\theta) \cdot t
+]</p>
+</li>
+<li>
+<p>Vertical motion:<br/>
+[
+\frac{d^2y}{dt^2} = -g
+\Rightarrow \frac{dy}{dt} = v_0 \sin(\theta) - g t
+\Rightarrow y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2
+]</p>
+</li>
+</ul>
+<p>These equations form the theoretical foundation of projectile motion and will be used to derive further quantities such as the time of flight, range, and trajectory.</p>
 <p>Projectile motion is a type of two-dimensional motion where an object is launched into the air with an initial velocity <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span> relative to the horizontal. The motion can be analyzed by breaking it into horizontal (x) and vertical (y) components.</p>
 <h3 id="11-equations-of-motion"><strong>1.1 Equations of Motion</strong></h3>
 <p>The horizontal and vertical components of the initial velocity are:</p>
