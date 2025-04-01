@@ -19,18 +19,19 @@ In the absence of air resistance, the only force acting on the projectile is gra
 This leads to the second-order differential equations:
 
 - Horizontal motion:  
-\[
+$$
 \frac{d^2x}{dt^2} = 0
 \Rightarrow \frac{dx}{dt} = v_{0x} = v_0 \cos(\theta)
 \Rightarrow x(t) = v_0 \cos(\theta) \cdot t
-\]
+$$
+
 
 - Vertical motion:  
-\[
+$$
 \frac{d^2y}{dt^2} = -g
 \Rightarrow \frac{dy}{dt} = v_0 \sin(\theta) - g t
 \Rightarrow y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2
-\]
+$$
 
 These equations form the theoretical foundation of projectile motion and will be used to derive further quantities such as the time of flight, range, and trajectory.
 
