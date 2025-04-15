@@ -231,6 +231,9 @@ Experimenting with parameters leads to different behaviors:
 
 ## 🔄 Extended Visualization: Adding Forced but Undamped Pendulum
 
+This scenario demonstrates periodic motion with sustained energy input and no damping, resulting in regular oscillations without energy loss — a resonance-friendly setup.
+
+
 We now add the **fourth** scenario that was previously missing:
 
 | Case                         | Damping ($b$) | Forcing ($A$) |
