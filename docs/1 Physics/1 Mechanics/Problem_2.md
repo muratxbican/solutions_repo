@@ -293,7 +293,6 @@ plt.show()
 
 ![alt text](image-21.png)
 
-This scenario demonstrates periodic motion with sustained energy input and no damping, resulting in regular oscillations without energy loss — a resonance-friendly setup.
 
 
 ## 9. Real-World Applications
