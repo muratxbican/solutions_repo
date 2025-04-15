@@ -284,7 +284,7 @@ Feel free to change the parameters and explore how simple rules can create unpre
 
 
 
-## 🔄 Appendix: Visualizing the Full Range of Behavior
+
 
 To fully illustrate the transition from simple to complex dynamics, we add simulations for:
 
@@ -353,7 +353,7 @@ plt.tight_layout()
 plt.show()
 
 
-
+## Appendix: Completion Checklist
 
 | **Category**               | **Content Description**                                                                 | **Included?** |
 |----------------------------|------------------------------------------------------------------------------------------|---------------|
