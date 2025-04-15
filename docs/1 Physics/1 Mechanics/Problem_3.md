@@ -353,6 +353,8 @@ plt.tight_layout()
 plt.show()
 ```
 
+![alt text](image-20.png)
+
 ## Appendix: Completion Checklist
 
 | **Category**               | **Content Description**                                                                 | **Included?** |
