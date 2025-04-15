@@ -351,7 +351,7 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.show()
-
+```
 
 ## Appendix: Completion Checklist
 
