@@ -421,6 +421,8 @@ plt.show()
 
 ![alt text](image-20.png)
 
+
+![alt text](image-22.png)
 ## Appendix: Completion Checklist
 
 | **Category**               | **Content Description**                                                                 | **Included?** |
