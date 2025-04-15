@@ -13,7 +13,7 @@
 <script>
         // Current page data
         var mkdocs_page_name = "Investigating the Dynamics of a Forced Damped Pendulum";
-        var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_2.md";
+        var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_3.md";
         var mkdocs_page_url = null;
       </script>
 <!--[if lt IE 9]>
@@ -47,6 +47,8 @@
 <li class="toctree-l1 current"><a class="reference internal current">1 Mechanics</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1: Investigating the Range as a Function of the Angle of Projection</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Investigating the Dynamics of a Forced Damped Pendulum</a>
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Dynamics of a Forced Damped Pendulum</a>
 <ul class="current">
@@ -84,11 +86,9 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#faq-common-questions">FAQ - Common Questions</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#appendix-completion-checklist">Appendix: Completion Checklist</a>
+<li class="toctree-l3"><a class="reference internal" href="#appendix-visualizing-the-full-range-of-behavior">🔄 Appendix: Visualizing the Full Range of Behavior</a>
 </li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../Problem_3/">Investigating the Dynamics of a Forced Damped Pendulum</a>
 </li>
 </ul>
 </li>
@@ -427,7 +427,61 @@ Yes. With certain combinations of damping, amplitude, and driving frequency, the
 Any system with damping and periodic forcing—like RLC circuits, mechanical oscillators, or climate systems—can be modeled similarly.</p>
 <hr/>
 <p>Feel free to change the parameters and explore how simple rules can create unpredictable patterns.</p>
-<h2 id="appendix-completion-checklist">Appendix: Completion Checklist</h2>
+<h2 id="appendix-visualizing-the-full-range-of-behavior">🔄 Appendix: Visualizing the Full Range of Behavior</h2>
+<p>To fully illustrate the transition from simple to complex dynamics, we add simulations for:</p>
+<ol>
+<li>Simple Pendulum (no damping, no forcing)  </li>
+<li>Damped Pendulum (with damping, no forcing)  </li>
+<li>Forced Damped Pendulum (already shown above)</li>
+</ol>
+<p>We simulate and visualize angle-time plots and phase diagrams for the first two to complete the progression.</p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<p>g = 9.81
+L = 1.0
+omega0 = np.sqrt(g / L)
+theta0 = 0.2
+omega_init = 0.0
+t_span = (0, 30)
+t_eval = np.linspace(*t_span, 5000)</p>
+<p>def pendulum_system(t, y, gamma, A, omega_drive):
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -gamma * omega - omega0**2 * np.sin(theta) + A * np.cos(omega_drive * t)
+    return [dtheta_dt, domega_dt]</p>
+<p>sol_simple = solve_ivp(pendulum_system, t_span, [theta0, omega_init],
+                       t_eval=t_eval, args=(0.0, 0.0, 0.0))</p>
+<p>sol_damped = solve_ivp(pendulum_system, t_span, [theta0, omega_init],
+                       t_eval=t_eval, args=(0.5, 0.0, 0.0))</p>
+<p>plt.figure(figsize=(14, 10))</p>
+<p>plt.subplot(2, 2, 1)
+plt.plot(sol_simple.t, sol_simple.y[0])
+plt.title("Simple Pendulum: Angle vs Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Angle <span class="arithmatex">\(\\theta\)</span> (rad)")
+plt.grid(True)</p>
+<p>plt.subplot(2, 2, 2)
+plt.plot(sol_simple.y[0], sol_simple.y[1])
+plt.title("Simple Pendulum: Phase Space")
+plt.xlabel("Angle <span class="arithmatex">\(\\theta\)</span> (rad)")
+plt.ylabel("Angular Velocity <span class="arithmatex">\(\\omega\)</span> (rad/s)")
+plt.grid(True)</p>
+<p>plt.subplot(2, 2, 3)
+plt.plot(sol_damped.t, sol_damped.y[0])
+plt.title("Damped Pendulum: Angle vs Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Angle <span class="arithmatex">\(\\theta\)</span> (rad)")
+plt.grid(True)</p>
+<p>plt.subplot(2, 2, 4)
+plt.plot(sol_damped.y[0], sol_damped.y[1])
+plt.title("Damped Pendulum: Phase Space")
+plt.xlabel("Angle <span class="arithmatex">\(\\theta\)</span> (rad)")
+plt.ylabel("Angular Velocity <span class="arithmatex">\(\\omega\)</span> (rad/s)")
+plt.grid(True)</p>
+<p>plt.tight_layout()
+plt.show()</p>
 <table>
 <thead>
 <tr>
@@ -497,8 +551,8 @@ Any system with damping and periodic forcing—like RLC circuits, mechanical osc
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../Problem_1/" title="Problem 1: Investigating the Range as a Function of the Angle of Projection"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../Problem_3/" title="Investigating the Dynamics of a Forced Damped Pendulum">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../Problem_2/" title="Investigating the Dynamics of a Forced Damped Pendulum"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../2%20Gravity/Problem_1/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
@@ -513,8 +567,8 @@ Any system with damping and periodic forcing—like RLC circuits, mechanical osc
 </div>
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
-<span><a href="../Problem_1/" style="color: #fcfcfc">« Previous</a></span>
-<span><a href="../Problem_3/" style="color: #fcfcfc">Next »</a></span>
+<span><a href="../Problem_2/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../2%20Gravity/Problem_1/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../../../js/jquery-3.6.0.min.js"></script>
