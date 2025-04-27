@@ -238,3 +238,5 @@ Gravitational pull reduces upward velocity; depending on initial speed, the payl
 
 ### Q5: How accurate is Euler's method here?
 For small enough time steps ($\Delta t$), it gives reasonably accurate approximations, but better methods exist (e.g., Runge-Kutta 4th order).
+
+[Visit Colab](https://colab.research.google.com/drive/1oLzUpJPz-obhlc4PYpVbjjlrkEAg6NSK?usp=sharing)
