@@ -2,150 +2,227 @@
 
 ## Motivation
 
-The relationship between the square of the orbital period and the cube of the orbital radius, known as **Kepler's Third Law**, is a cornerstone of celestial mechanics. It connects gravitational physics with real-world phenomena such as satellite trajectories, planetary orbits, and exoplanetary systems.
-
-Understanding this relationship enables us to calculate masses of celestial objects, distances between them, and predict their motions across time.
+Kepler's Third Law elegantly describes how the time a celestial object takes to complete its orbit depends on the size of the orbit itself. This deep relationship between period and radius provides powerful tools for calculating planetary distances, masses of stars, and understanding orbital mechanics in systems ranging from satellites to exoplanets.
 
 ---
 
-## Derivation of Kepler's Third Law
+## Derivation of Kepler's Third Law for Circular Orbits
 
-Consider a small body of mass $m$ orbiting a much larger body of mass $M$ (e.g., a planet around a star) in a **circular orbit**.
+For an object of mass $m$ orbiting a massive body of mass $M$:
 
-From Newton's Law of Universal Gravitation:
+The gravitational force provides the necessary centripetal force:
 
-\[ F_{gravity} = \frac{G M m}{r^2} \]
+$$
+\frac{GMm}{r^2} = m \frac{v^2}{r}
+$$
 
-And from centripetal force requirement for circular motion:
+Simplifying for orbital velocity $v$:
 
-\[ F_{centripetal} = m \frac{v^2}{r} \]
+$$
+v = \sqrt{\frac{GM}{r}}
+$$
 
-Setting these equal (since gravity provides the centripetal force):
+The orbital period $T$ relates to the circumference of the orbit and velocity:
 
-\[ \frac{G M m}{r^2} = m \frac{v^2}{r} \]
-
-Simplifying:
-
-\[ v^2 = \frac{G M}{r} \]
-
-The orbital period $T$ (time to complete one full circle) is:
-
-\[ T = \frac{2 \pi r}{v} \]
-
-Substituting $v$ from the previous expression:
-
-\[ T = 2 \pi r \sqrt{\frac{r}{G M}} \]
+$$
+T = \frac{2\pi r}{v} = 2\pi \sqrt{\frac{r^3}{GM}}
+$$
 
 Squaring both sides:
 
-\[ T^2 = 4 \pi^2 \frac{r^3}{G M} \]
+$$
+T^2 = \frac{4\pi^2}{GM} r^3
+$$
 
-Thus, we have derived:
+Thus:
 
-\[ T^2 \propto r^3 \]
-
-where the proportionality constant is \( \frac{4\pi^2}{GM} \).
+$$
+T^2 \propto r^3
+$$
 
 ---
 
-## Implications for Astronomy
+## Applications in Astronomy
 
-- **Mass Determination**: If we can measure $T$ and $r$ for an orbit, we can find the mass $M$ of the central object.
-- **Distance Measurements**: Knowing $T$, we can infer the orbital radius $r$.
-- **Exoplanet Discovery**: Kepler's law helps detect planets around other stars by analyzing their orbital properties.
-- **Satellite Deployment**: Engineers use these principles when placing satellites into orbit around Earth.
+- **Measuring Masses**: Orbital data reveal masses of stars, planets, and galaxies.
+- **Mapping Distances**: Knowing the period allows inferring distances without direct measurement.
+- **Predicting Motion**: Useful for satellite placement and mission planning.
 
 ---
 
 ## Real-World Examples
 
-### Moon around Earth
-- Orbital radius: $r \approx 3.84 \times 10^8$ m
-- Orbital period: $T \approx 27.3$ days
-
-Using Kepler's law, we can predict the mass of Earth by measuring $T$ and $r$.
-
-### Planets in the Solar System
-- All planets obey the $T^2 \propto r^3$ relationship relative to the Sun.
-- Deviations can indicate additional forces or masses (like Jupiter's effect on asteroids).
-
----
-
-## Simulation: Verifying Kepler's Third Law
-
-We will simulate multiple circular orbits with varying radii and verify that $T^2$ versus $r^3$ is a linear relationship.
+### 1. Moon's Orbit Around Earth
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-G = 6.67430e-11  # gravitational constant, m^3 kg^-1 s^-2
-M = 5.972e24     # mass of Earth, kg
+g = 6.67430e-11  # m^3 kg^-1 s^-2
+M_earth = 5.972e24  # kg
+r_moon = 384400e3  # meters
 
-# Define radii (from 1e7 m to 5e8 m)
-radii = np.linspace(1e7, 5e8, 100)
-
-# Calculate periods
-periods = 2 * np.pi * np.sqrt(radii**3 / (G * M))
-
-# Plot T^2 vs r^3
-plt.figure(figsize=(8,6))
-plt.plot(radii**3, periods**2, 'o', markersize=4)
-plt.title("Verification of Kepler's Third Law")
-plt.xlabel("$r^3$ (m$^3$)")
-plt.ylabel("$T^2$ (s$^2$)")
-plt.grid(True)
-plt.show()
+# Orbital period calculation
+T_moon = 2 * np.pi * np.sqrt(r_moon**3 / (g * M_earth))
+T_moon_days = T_moon / (60 * 60 * 24)
+print(f"Calculated Orbital Period of Moon: {T_moon_days:.2f} days")
 ```
+>>Calculated Orbital Period of Moon: 27.45 days
 
-This plot should yield a straight line, confirming that $T^2 \propto r^3$.
 
-### Bonus: Plotting Circular Orbits
-
-Let's plot sample circular orbits for different radii.
-
-```python
-# Define function to plot orbits
-def plot_orbits(radii):
-    fig, ax = plt.subplots(figsize=(8,8))
-    theta = np.linspace(0, 2*np.pi, 300)
-    for r in radii:
-        x = r * np.cos(theta)
-        y = r * np.sin(theta)
-        ax.plot(x, y, label=f"r = {r/1e6:.1f} Mm")
-
-    ax.plot(0, 0, 'yo', markersize=12)  # central mass
-    ax.set_aspect('equal')
-    ax.set_title("Circular Orbits Around a Central Body")
-    ax.set_xlabel("x (m)")
-    ax.set_ylabel("y (m)")
-    ax.legend()
-    plt.grid(True)
-    plt.show()
-
-# Plot sample orbits
-sample_radii = [1e7, 2e7, 3e7, 4e7]
-plot_orbits(sample_radii)
-```
+**Note:** This code calculates the Moon's orbital period around Earth using gravitational principles.
 
 ---
 
-## Extensions to Elliptical Orbits
+### Visualizing Moon's Orbit
 
-Kepler's Third Law also applies to **elliptical orbits** if we replace $r$ with the **semi-major axis** $a$ of the ellipse:
+```python
+# Simulate the orbit
+n_frames = 250
+theta = np.linspace(0, 2*np.pi, n_frames)
+x_moon = r_moon * np.cos(theta)
+y_moon = r_moon * np.sin(theta)
 
-\[ T^2 = \frac{4 \pi^2}{G M} a^3 \]
+fig, ax = plt.subplots(figsize=(6,6))
+ax.plot(0, 0, 'yo', label='Earth', markersize=12)
+ax.plot(x_moon, y_moon, 'b--', alpha=0.7)
+ax.set_aspect('equal')
+ax.set_xlabel('x (m)')
+ax.set_ylabel('y (m)')
+ax.set_title('Moon Orbiting Earth')
+plt.legend()
+plt.grid()
+plt.show()
+```
+![alt text](image.png)
 
-Thus, for any orbit (circle is a special case of an ellipse), the same $T^2 \propto a^3$ relationship holds.
+**Note:** This simulation shows the Moon's near-circular orbit around Earth.
 
-This is crucial for studying:
-- Planetary orbits
-- Comets (which have highly elliptical orbits)
-- Binary star systems
+---
+
+### 2. Planets in the Solar System
+
+```python
+# Planets data
+radii_AU = np.array([0.39, 0.72, 1.00, 1.52, 5.20])  # AU
+periods_years = np.array([0.24, 0.62, 1.00, 1.88, 11.86])
+planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter']
+
+r_cubed = radii_AU**3
+T_squared = periods_years**2
+
+# Plot
+plt.figure(figsize=(8,6))
+plt.plot(r_cubed, T_squared, 'o-', color='darkgreen')
+
+for i, planet in enumerate(planets):
+    plt.text(r_cubed[i]*1.02, T_squared[i]*0.98, planet)
+
+plt.xlabel('$r^3$ (AU$^3$)')
+plt.ylabel('$T^2$ (Years$^2$)')
+plt.title("Kepler's Third Law Across Planets")
+plt.grid()
+plt.show()
+```
+![alt text](image-1.png)
+
+**Note:** This plot confirms the $T^2 \propto r^3$ relationship for planets in the Solar System.
+
+---
+
+### 3. ISS Orbit Around Earth
+
+```python
+# Constants for ISS
+r_iss = 6771e3  # Radius from Earth's center to ISS (Earth's radius + 400 km altitude)
+
+# Orbital period calculation for ISS
+T_iss = 2 * np.pi * np.sqrt(r_iss**3 / (g * M_earth))
+T_iss_minutes = T_iss / 60
+print(f"Orbital Period of ISS: {T_iss_minutes:.2f} minutes")
+```
+>>Orbital Period of ISS: 92.42 minutes
+
+
+**Note:** This example shows that the ISS completes an orbit in about 90 minutes, much faster than the Moon.
+
+---
+
+### Log-Log Plot of $T^2$ vs $r^3$
+
+```python
+# Log-log plot
+plt.figure(figsize=(8,6))
+plt.loglog(r_cubed, T_squared, 'o-', color='purple')
+plt.xlabel('log($r^3$) (AU$^3$)')
+plt.ylabel('log($T^2$) (Years$^2$)')
+plt.title('Log-Log Plot: Kepler\'s Third Law')
+plt.grid(True, which='both', ls='--')
+plt.show()
+```
+![alt text](image-2.png)
+
+**Note:** A straight line in the log-log plot verifies the power-law relationship.
+
+---
+
+## Extension to Elliptical Orbits
+
+Kepler generalized his Third Law for ellipses by replacing $r$ with the semi-major axis $a$:
+
+$$
+T^2 = \frac{4\pi^2}{GM} a^3
+$$
+
+Thus, whether an orbit is circular or elliptical, the relation remains consistent.
+
+---
+
+## Simulation: Fitting $T^2$ vs $r^3$
+
+```python
+# Fit and plot linear regression
+from scipy.stats import linregress
+
+slope, intercept, r_value, _, _ = linregress(r_cubed, T_squared)
+fit_line = slope * r_cubed + intercept
+
+plt.figure(figsize=(8,6))
+plt.plot(r_cubed, T_squared, 'o', label='Observed')
+plt.plot(r_cubed, fit_line, '-', label=f"Fit: $T^2 = {slope:.2f}r^3 + {intercept:.2f}$")
+plt.xlabel('$r^3$ (AU$^3$)')
+plt.ylabel('$T^2$ (Years$^2$)')
+plt.title("Linear Fit of Kepler's Law")
+plt.legend()
+plt.grid()
+plt.show()
+```
+![alt text](image-3.png)
+
+**Note:** The best-fit line shows how closely the data follows Kepler's Third Law.
 
 ---
 
 # Conclusion
 
-Kepler's Third Law elegantly connects time and space in celestial mechanics. It reflects the deep relationship between mass, distance, and motion, providing a powerful tool across astrophysics, orbital mechanics, and cosmology.
+Kepler's Third Law, emerging from simple physical principles, connects space and time in the cosmos. From moons to exoplanets, understanding $T^2 \propto r^3$ remains a foundational tool in modern astronomy and physics.
+
+---
+
+# Frequently Asked Questions (FAQ)
+
+### Q1: Why does $T^2$ scale with $r^3$?
+Because gravitational force decreases with distance squared, and orbital speed depends on this force. When combined with the relationship between velocity and period, it leads to $T^2 \propto r^3$.
+
+### Q2: Does Kepler's Third Law apply to non-circular orbits?
+Yes, it applies to elliptical orbits if we replace $r$ with the semi-major axis $a$.
+
+### Q3: Why do satellites like ISS orbit faster than the Moon?
+The closer an object is to Earth, the stronger the gravitational force, leading to a higher orbital velocity and shorter period.
+
+### Q4: What happens if another force acts during orbit?
+Additional forces (like atmospheric drag) can cause deviations from pure Keplerian motion, requiring corrections.
+
+### Q5: How is Kepler's Law used today?
+It is critical for satellite deployment, interplanetary travel planning, and discovery of exoplanets by observing transit periods and orbital dynamics.
