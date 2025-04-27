@@ -68,7 +68,7 @@ T_moon = 2 * np.pi * np.sqrt(r_moon**3 / (g * M_earth))
 T_moon_days = T_moon / (60 * 60 * 24)
 print(f"Calculated Orbital Period of Moon: {T_moon_days:.2f} days")
 ```
->>Calculated Orbital Period of Moon: 27.45 days
+>> Calculated Orbital Period of Moon: 27.45 days
 
 
 **Note:** This code calculates the Moon's orbital period around Earth using gravitational principles.
@@ -95,44 +95,45 @@ plt.legend()
 plt.grid()
 plt.show()
 ```
-![alt text](image.png)
+![alt text](image-5.png)
 
 **Note:** This simulation shows the Moon's near-circular orbit around Earth.
 
 ---
 
-### 2. Planets in the Solar System
+### 2. Inner Planets in the Solar System
 
 ```python
-# Planets data
-radii_AU = np.array([0.39, 0.72, 1.00, 1.52, 5.20])  # AU
-periods_years = np.array([0.24, 0.62, 1.00, 1.88, 11.86])
-planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter']
+# Inner Planets data
+radii_AU = np.array([0.39, 0.72, 1.00, 1.52])  # AU
+periods_years = np.array([0.24, 0.62, 1.00, 1.88])
+planets = ['Mercury', 'Venus', 'Earth', 'Mars']
 
 r_cubed = radii_AU**3
 T_squared = periods_years**2
 
 # Plot
 plt.figure(figsize=(8,6))
-plt.plot(r_cubed, T_squared, 'o-', color='darkgreen')
+plt.plot(r_cubed, T_squared, 'o-', color='royalblue', label=r'$T^2$ vs $r^3$')
 
 for i, planet in enumerate(planets):
     plt.annotate(planet,
                  (r_cubed[i], T_squared[i]),
                  textcoords="offset points",
-                 xytext=(10,5),  # X ve Y yönünde hafif kaydır
-                 ha='left')
+                 xytext=(5,5),
+                 ha='center')
 
-plt.xlabel('$r^3$ (AU$^3$)')
-plt.ylabel('$T^2$ (Years$^2$)')
-plt.title("Kepler's Third Law Across Planets")
-plt.grid()
+plt.xlabel('Orbital Radius$^3$ (AU$^3$)', fontsize=12)
+plt.ylabel('Orbital Period$^2$ (Years$^2$)', fontsize=12)
+plt.title(r"Kepler's Third Law: $T^2 \propto r^3$", fontsize=14)
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
 plt.show()
-
 ```
-![alt text](image-1.png)
+![alt text](image-6.png)
 
-**Note:** This plot confirms the $T^2 \propto r^3$ relationship for planets in the Solar System.
+**Note:** This plot confirms the $T^2 \propto r^3$ relationship for the inner planets.
 
 ---
 
@@ -147,7 +148,7 @@ T_iss = 2 * np.pi * np.sqrt(r_iss**3 / (g * M_earth))
 T_iss_minutes = T_iss / 60
 print(f"Orbital Period of ISS: {T_iss_minutes:.2f} minutes")
 ```
->>Orbital Period of ISS: 92.42 minutes
+>> Orbital Period of ISS: 92.42 minutes
 
 
 **Note:** This example shows that the ISS completes an orbit in about 90 minutes, much faster than the Moon.
@@ -164,9 +165,10 @@ plt.xlabel('log($r^3$) (AU$^3$)')
 plt.ylabel('log($T^2$) (Years$^2$)')
 plt.title('Log-Log Plot: Kepler\'s Third Law')
 plt.grid(True, which='both', ls='--')
+plt.tight_layout()
 plt.show()
 ```
-![alt text](image-2.png)
+![alt text](image-7.png)
 
 **Note:** A straight line in the log-log plot verifies the power-law relationship.
 
@@ -201,9 +203,10 @@ plt.ylabel('$T^2$ (Years$^2$)')
 plt.title("Linear Fit of Kepler's Law")
 plt.legend()
 plt.grid()
+plt.tight_layout()
 plt.show()
 ```
-![alt text](image-3.png)
+![alt text](image-8.png)
 
 **Note:** The best-fit line shows how closely the data follows Kepler's Third Law.
 
