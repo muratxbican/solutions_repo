@@ -307,15 +307,7 @@ plt.show()
 <pre><code class="language-python">df = pd.DataFrame(results).T[['v1', 'v2', 'v3']]
 print(df)
 </code></pre>
-<blockquote>
-<blockquote>
-<pre><code>               v1            v2            v3
-</code></pre>
-<p>Earth     7909.680822  11185.977892  43587.649017</p>
-<p>Mars      3554.684515   5027.083051  34500.322314</p>
-<p>Jupiter  42567.506276  60199.544692  62968.486858</p>
-</blockquote>
-</blockquote>
+<p><img alt="alt text" src="../image-14.png"/></p>
 <h3 id="4-log-log-plot-mass-vs-escape-velocity">4. Log-Log Plot (Mass vs Escape Velocity)</h3>
 <pre><code class="language-python">mass_vals = [results[body]['mass'] for body in labels]
 v2_vals = [results[body]['v2'] for body in labels]
