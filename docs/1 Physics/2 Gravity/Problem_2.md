@@ -113,7 +113,9 @@ for body, velocities in results.items():
     print(f"{body}: v1 = {velocities['v1']:.2f} m/s, v2 = {velocities['v2']:.2f} m/s, v3 = {velocities['v3']:.2f} m/s")
 ```
 >> Earth: v1 = 7909.68 m/s, v2 = 11185.98 m/s, v3 = 43587.65 m/s
+
 >> Mars: v1 = 3554.68 m/s, v2 = 5027.08 m/s, v3 = 34500.32 m/s
+
 >> Jupiter: v1 = 42567.51 m/s, v2 = 60199.54 m/s, v3 = 62968.49 m/s
 
 **Note:** This script calculates the first, second, and third cosmic velocities for Earth, Mars, and Jupiter.
@@ -178,9 +180,13 @@ print(df)
 ```
 
 >>                    v1            v2            v3
+
 >> Earth     7909.680822  11185.977892  43587.649017
+
 >> Mars      3554.684515   5027.083051  34500.322314
+
 >> Jupiter  42567.506276  60199.544692  62968.486858
+
 
 ### 4. Log-Log Plot (Mass vs Escape Velocity)
 
