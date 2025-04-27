@@ -179,14 +179,7 @@ df = pd.DataFrame(results).T[['v1', 'v2', 'v3']]
 print(df)
 ```
 
->>                    v1            v2            v3
-
->> Earth     7909.680822  11185.977892  43587.649017
-
->> Mars      3554.684515   5027.083051  34500.322314
-
->> Jupiter  42567.506276  60199.544692  62968.486858
-
+![alt text](image-14.png)
 
 ### 4. Log-Log Plot (Mass vs Escape Velocity)
 
