@@ -252,3 +252,5 @@ Using multi-stage rockets, gravitational assists, and carefully planned launch t
 
 ### Q5: Are cosmic velocities affected by atmospheres?
 Yes, atmospheric drag must be overcome, requiring additional velocity beyond the theoretical minimums when launching from planets with atmospheres like Earth.
+
+[Visit Colab](https://colab.research.google.com/drive/1_gita8rySUYRawe5BO7kkLk4w7_Oq4JJ?usp=sharing)
