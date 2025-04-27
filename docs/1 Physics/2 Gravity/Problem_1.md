@@ -117,13 +117,18 @@ plt.figure(figsize=(8,6))
 plt.plot(r_cubed, T_squared, 'o-', color='darkgreen')
 
 for i, planet in enumerate(planets):
-    plt.text(r_cubed[i]*1.02, T_squared[i]*0.98, planet)
+    plt.annotate(planet,
+                 (r_cubed[i], T_squared[i]),
+                 textcoords="offset points",
+                 xytext=(10,5),  # X ve Y yönünde hafif kaydır
+                 ha='left')
 
 plt.xlabel('$r^3$ (AU$^3$)')
 plt.ylabel('$T^2$ (Years$^2$)')
 plt.title("Kepler's Third Law Across Planets")
 plt.grid()
 plt.show()
+
 ```
 ![alt text](image-1.png)
 
