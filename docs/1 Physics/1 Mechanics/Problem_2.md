@@ -76,7 +76,7 @@ plt.legend()
 plt.show()
 ```
 
-![alt text](image-14.png)
+![alt text](image-23.png)
 
 ---
 
