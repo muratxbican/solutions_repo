@@ -214,6 +214,49 @@ plt.show()
 
 ---
 
+
+## Estimating Masses Using Kepler's Third Law
+
+Kepler's Third Law can be rearranged to estimate the mass of a central body when the orbital radius and period of a satellite are known:
+
+$$
+M = \frac{4\pi^2 r^3}{G T^2}
+$$
+
+Where:
+- $M$ is the mass of the central body (e.g., the Sun or Earth),
+- $r$ is the orbital radius (in meters),
+- $T$ is the orbital period (in seconds),
+- $G$ is the gravitational constant ($6.67430 \times 10^{-11}$ m³/kg/s²).
+
+The following Python code demonstrates how to estimate:
+
+- the **mass of the Sun**, using Earth's orbit, and  
+- the **mass of the Earth**, using the Moon's orbit.
+
+```python
+import numpy as np
+
+# Gravitational constant
+G = 6.67430e-11  # m^3 kg^-1 s^-2
+
+# === Estimating the Sun's Mass using Earth's Orbit ===
+r_earth = 1.496e11  # meters (1 AU)
+T_earth = 365.25 * 24 * 3600  # seconds (1 year)
+
+M_sun = 4 * np.pi**2 * r_earth**3 / (G * T_earth**2)
+print(f"Estimated Mass of the Sun: {M_sun:.2e} kg")
+
+# === Estimating the Earth's Mass using Moon's Orbit ===
+r_moon = 384400e3  # meters
+T_moon = 27.32 * 24 * 3600  # seconds
+
+M_earth = 4 * np.pi**2 * r_moon**3 / (G * T_moon**2)
+print(f"Estimated Mass of the Earth: {M_earth:.2e} kg")
+```
+>> Estimated Mass of the Sun: 1.99e+30 kg
+>> Estimated Mass of the Earth: 6.03e+24 kg
+
 # Conclusion
 
 Kepler's Third Law, emerging from simple physical principles, connects space and time in the cosmos. From moons to exoplanets, understanding $T^2 \propto r^3$ remains a foundational tool in modern astronomy and physics.
