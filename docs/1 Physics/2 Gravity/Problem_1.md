@@ -232,8 +232,9 @@ Where:
 The following Python code demonstrates how to estimate:
 
 - the **mass of the Sun**, using Earth's orbit, and  
-- the **mass of the Earth**, using the Moon's orbit.  
-It also includes a **visual bar chart** comparing both results.
+- the **mass of the Earth**, using the Moon's orbit.
+
+It also includes a **visual bar chart** comparing both results, where values are normalized relative to Earth's mass (Earth = 1), making it easier to interpret without large numbers like $10^{30}$ kg.
 
 ```python
 import numpy as np
@@ -256,27 +257,47 @@ T_moon = 27.32 * 24 * 3600  # seconds
 M_earth = 4 * np.pi**2 * r_moon**3 / (G * T_moon**2)
 print(f"Estimated Mass of the Earth: {M_earth:.2e} kg")
 
-# === Bar Chart Comparison ===
+# === Relative Mass Bar Chart ===
+# Normalize masses to Earth = 1
+relative_masses = [1, M_sun / M_earth]
 labels = ['Earth', 'Sun']
-masses = [M_earth, M_sun]
 
 plt.figure(figsize=(8,5))
-plt.bar(labels, masses, color=['skyblue', 'orange'])
-plt.ylabel('Mass (kg)')
-plt.title('Comparison of Estimated Masses')
-plt.yscale('log')  # Log scale due to huge difference
-plt.grid(True, which='both', axis='y', linestyle='--', alpha=0.5)
+bars = plt.bar(labels, relative_masses, color=['skyblue', 'orange'])
+plt.ylabel('Mass (in Earth Masses)')
+plt.title('Sun vs Earth Mass (Relative Comparison)')
+
+# Add value labels on top of bars
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2.0, yval * 1.02, f"{yval:.0f}", ha='center')
+
+plt.grid(axis='y', linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.show()
 ```
-![alt text](image-21.png)
+
+![alt text](image-23.png)
+
+**Note:** Instead of showing masses in kilograms (e.g., $1.99 \times 10^{30}$ kg for the Sun), we normalize them to Earth = 1. This way:
+
+- Earth appears as **1 unit**,
+- Sun appears as approximately **333,000 Earths**.
+
+This makes the difference in scale easier to grasp, especially when comparing to everyday objects like a **100 kg person**.
 
 
-# Conclusion
+### Conclusion
 
-Kepler's Third Law, emerging from simple physical principles, connects space and time in the cosmos. From moons to exoplanets, understanding $T^2 \propto r^3$ remains a foundational tool in modern astronomy and physics.
+Kepler's Third Law, emerging from simple gravitational principles, enables us to determine the mass of celestial bodies just by observing orbital distances and periods.
 
----
+In this example:
+
+- **Earth's mass** was calculated using the Moon's orbit,
+- **Sun's mass** was calculated using Earth's orbit.
+
+Both were visualized on a **relative scale**, making abstract numbers more intuitive and physically meaningful.
+
 
 # Frequently Asked Questions (FAQ)
 
