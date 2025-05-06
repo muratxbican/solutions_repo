@@ -232,10 +232,12 @@ Where:
 The following Python code demonstrates how to estimate:
 
 - the **mass of the Sun**, using Earth's orbit, and  
-- the **mass of the Earth**, using the Moon's orbit.
+- the **mass of the Earth**, using the Moon's orbit.  
+It also includes a **visual bar chart** comparing both results.
 
 ```python
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Gravitational constant
 G = 6.67430e-11  # m^3 kg^-1 s^-2
@@ -253,9 +255,22 @@ T_moon = 27.32 * 24 * 3600  # seconds
 
 M_earth = 4 * np.pi**2 * r_moon**3 / (G * T_moon**2)
 print(f"Estimated Mass of the Earth: {M_earth:.2e} kg")
+
+# === Bar Chart Comparison ===
+labels = ['Earth', 'Sun']
+masses = [M_earth, M_sun]
+
+plt.figure(figsize=(8,5))
+plt.bar(labels, masses, color=['skyblue', 'orange'])
+plt.ylabel('Mass (kg)')
+plt.title('Comparison of Estimated Masses')
+plt.yscale('log')  # Log scale due to huge difference
+plt.grid(True, which='both', axis='y', linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.show()
 ```
->> Estimated Mass of the Sun: 1.99e+30 kg
->> Estimated Mass of the Earth: 6.03e+24 kg
+![alt text](image-21.png)
+
 
 # Conclusion
 
