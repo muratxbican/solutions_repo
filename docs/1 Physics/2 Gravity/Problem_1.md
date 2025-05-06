@@ -279,9 +279,8 @@ plt.show()
 
 ```
 
-![
-    
-](image-24.png)
+![alt text](image-25.png)
+
 **Note:** Instead of showing masses in kilograms (e.g., $1.99 \times 10^{30}$ kg for the Sun), we normalize them to Earth = 1. This way:
 
 - Earth appears as **1 unit**,
