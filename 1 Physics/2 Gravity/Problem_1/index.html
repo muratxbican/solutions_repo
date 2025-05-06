@@ -374,27 +374,30 @@ T_moon = 27.32 * 24 * 3600  # seconds
 M_earth = 4 * np.pi**2 * r_moon**3 / (G * T_moon**2)
 print(f"Estimated Mass of the Earth: {M_earth:.2e} kg")
 
-# === Relative Mass Bar Chart ===
+# === Relative Mass Bar Chart (Logarithmic Scale) ===
 # Normalize masses to Earth = 1
 relative_masses = [1, M_sun / M_earth]
 labels = ['Earth', 'Sun']
 
 plt.figure(figsize=(8,5))
 bars = plt.bar(labels, relative_masses, color=['skyblue', 'orange'])
-plt.ylabel('Mass (in Earth Masses)')
+plt.yscale('log')  # Logarithmic scale to make small values visible
+plt.ylabel('Mass (in Earth Masses, log scale)')
 plt.title('Sun vs Earth Mass (Relative Comparison)')
 
 # Add value labels on top of bars
 for bar in bars:
     yval = bar.get_height()
-    plt.text(bar.get_x() + bar.get_width()/2.0, yval * 1.02, f"{yval:.0f}", ha='center')
+    plt.text(bar.get_x() + bar.get_width()/2.0, yval * 1.2, f"{yval:.0f}", ha='center')
 
-plt.grid(axis='y', linestyle='--', alpha=0.5)
+plt.grid(axis='y', linestyle='--', alpha=0.5, which='both')
 plt.tight_layout()
 plt.show()
+
 </code></pre>
-<p><img alt="alt text" src="../image-23.png"/></p>
-<p><strong>Note:</strong> Instead of showing masses in kilograms (e.g., <span class="arithmatex">\(1.99 \times 10^{30}\)</span> kg for the Sun), we normalize them to Earth = 1. This way:</p>
+<p>![</p>
+<p>](image-24.png)
+<strong>Note:</strong> Instead of showing masses in kilograms (e.g., <span class="arithmatex">\(1.99 \times 10^{30}\)</span> kg for the Sun), we normalize them to Earth = 1. This way:</p>
 <ul>
 <li>Earth appears as <strong>1 unit</strong>,</li>
 <li>Sun appears as approximately <strong>333,000 Earths</strong>.</li>
