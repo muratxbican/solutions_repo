@@ -256,3 +256,7 @@ Yes, in devices like:
 
 This simulation demonstrates how the Lorentz force governs particle dynamics in multiple fields. Through graphical representation and parameter exploration, we can see how fundamental electromagnetic principles manifest in real-world physics.
 
+[Visit Colab](https://colab.research.google.com/drive/1U2SUhhLwMrBZA8Pw2WoeRkO77mxVUJ_P#scrollTo=hM3GqyeJIc2E&line=16&uniqifier=1)
+
+
+
