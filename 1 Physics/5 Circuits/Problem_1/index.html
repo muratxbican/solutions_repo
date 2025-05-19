@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Problem 1: Equivalent Resistance Using Graph Theory - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Problem 1: Equivalent Resistance Using Graph Theory";
         var mkdocs_page_input_path = "1 Physics/5 Circuits/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -76,8 +76,32 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">5 Circuits</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1: Equivalent Resistance Using Graph Theory</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation">🧠 Motivation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#define-and-visualize-initial-circuit">🔌 Define and Visualize Initial Circuit</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-series-reduction-abc">🔄 Step 1: Series Reduction (A–B–C)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-parallel-reduction-ac">♻️ Step 2: Parallel Reduction (A–C)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#final-result">✅ Final Result</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis-summary">📈 Analysis Summary</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frequently-asked-questions-faq">❓ Frequently Asked Questions (FAQ)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#can-this-work-with-bigger-graphs">💡 Can this work with bigger graphs?</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#why-use-networkx">💡 Why use networkx?</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#can-i-use-multigraph">💡 Can I use MultiGraph?</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#can-i-visualize-more-steps">💡 Can I visualize more steps?</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +187,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">5 Circuits</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Problem 1: Equivalent Resistance Using Graph Theory</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +195,92 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="problem-1-equivalent-resistance-using-graph-theory">Problem 1: Equivalent Resistance Using Graph Theory</h1>
+<hr/>
+<h2 id="motivation">🧠 Motivation</h2>
+<p>In complex electrical circuits, manual simplification using series/parallel rules becomes inefficient. Graph theory provides an elegant, visual solution by treating:</p>
+<ul>
+<li>Nodes as junctions</li>
+<li>Edges as resistors (with weight = resistance in ohms)</li>
+</ul>
+<p>This simulation shows how a circuit is reduced step-by-step using Python and <code>networkx</code>.</p>
+<hr/>
+<h2 id="define-and-visualize-initial-circuit">🔌 Define and Visualize Initial Circuit</h2>
+<pre><code class="language-python">def draw_circuit(G, title):
+    pos = nx.spring_layout(G, seed=42)
+    labels = nx.get_edge_attributes(G, 'resistance')
+    plt.figure(figsize=(6, 4))
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=700)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels={k: f"{v}Ω" for k, v in labels.items()})
+    plt.title(title)
+    plt.axis('off')
+    plt.tight_layout()
+    plt.show()
+
+# Initial circuit: A–B (10Ω), B–C (5Ω), A–C (20Ω)
+G = nx.Graph()
+G.add_edge('A', 'B', resistance=10)
+G.add_edge('B', 'C', resistance=5)
+G.add_edge('A', 'C', resistance=20)
+
+draw_circuit(G, "Step 0: Initial Circuit")
+</code></pre>
+<p><img alt="alt text" src="../image.png"/></p>
+<hr/>
+<h2 id="step-1-series-reduction-abc">🔄 Step 1: Series Reduction (A–B–C)</h2>
+<ul>
+<li>Node <strong>B</strong> is between <strong>A and C</strong> with degree 2 → series rule applies.</li>
+<li>Combine:<br/>
+  [
+  R_{AB} + R_{BC} = 10Ω + 5Ω = 15Ω
+  ]</li>
+</ul>
+<pre><code class="language-python">G.remove_node('B')
+G.add_edge('A', 'C', resistance=15)  # Now A–C has 15Ω and 20Ω in parallel
+
+draw_circuit(G, "Step 1: After Series Reduction (B removed)")
+</code></pre>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<hr/>
+<h2 id="step-2-parallel-reduction-ac">♻️ Step 2: Parallel Reduction (A–C)</h2>
+<ul>
+<li>Two edges between <strong>A–C</strong>: 15Ω and 20Ω</li>
+<li>Use formula:<br/>
+  [
+  \frac{1}{R_{eq}} = \frac{1}{15} + \frac{1}{20} = \frac{7}{60} → R_{eq} ≈ 8.57Ω
+  ]</li>
+</ul>
+<pre><code class="language-python"># Manually remove both and replace with equivalent
+G.remove_edges_from(list(G.edges()))
+G.add_edge('A', 'C', resistance=1 / (1/15 + 1/20))
+
+draw_circuit(G, "Step 2: Final Equivalent Resistance Between A and C")
+</code></pre>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<hr/>
+<h2 id="final-result">✅ Final Result</h2>
+<div class="arithmatex">\[
+\boxed{R_{eq} \approx 8.57\, \Omega}
+\]</div>
+<hr/>
+<h2 id="analysis-summary">📈 Analysis Summary</h2>
+<ul>
+<li>Step 0: Triangle network</li>
+<li>Step 1: Simplified using <strong>series rule</strong></li>
+<li>Step 2: Final reduction with <strong>parallel rule</strong></li>
+<li>Graphically tracked each step</li>
+</ul>
+<hr/>
+<h2 id="frequently-asked-questions-faq">❓ Frequently Asked Questions (FAQ)</h2>
+<h3 id="can-this-work-with-bigger-graphs">💡 Can this work with bigger graphs?</h3>
+<p>Yes, but you'd need to add logic to automatically detect series/parallel structures and optionally use Δ–Y transformations.</p>
+<h3 id="why-use-networkx">💡 Why use <code>networkx</code>?</h3>
+<p>It simplifies circuit graph creation, traversal, and visualization.</p>
+<h3 id="can-i-use-multigraph">💡 Can I use MultiGraph?</h3>
+<p>Yes, for actual parallel edges <code>nx.MultiGraph()</code> is better, but here we simulate it manually.</p>
+<h3 id="can-i-visualize-more-steps">💡 Can I visualize more steps?</h3>
+<p>Absolutely. Each reduction step can be visualized with <code>draw_circuit()</code> after each transformation.</p>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
