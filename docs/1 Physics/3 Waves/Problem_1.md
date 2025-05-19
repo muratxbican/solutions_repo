@@ -179,3 +179,4 @@ Introduce random phase offsets or amplitude differences per source.
 Yes — the math of wave interference applies to **any kind of wave**: sound, light, water, or even probability amplitudes in quantum systems.
 
 ---
+[Visit Colab](https://colab.research.google.com/drive/1HjFVy4r1IEFeyBXseTmDlUd5sAUiDMwB#scrollTo=QtLG-Pfw7aBt&line=64&uniqifier=1)
