@@ -188,8 +188,7 @@ create_animation_gif(generate_hexagon_sources())
 ShowImage(filename="interference.gif")
 
 ```
-
-[🔗 View Interference Animation (GIF)](indir.gif)
+![alt text](indir.gif)
 
 
 ---
