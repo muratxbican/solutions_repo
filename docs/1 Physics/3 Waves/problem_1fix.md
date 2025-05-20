@@ -189,7 +189,8 @@ ShowImage(filename="interference.gif")
 
 ```
 
-![alt text](image-23.png)
+[🔗 View Interference Animation (GIF)](indir.gif)
+
 
 ---
 
