@@ -13,7 +13,7 @@
 <script>
         // Current page data
         var mkdocs_page_name = "Problem 1";
-        var mkdocs_page_input_path = "1 Physics/3 Waves/Problem_1.md";
+        var mkdocs_page_input_path = "1 Physics/3 Waves/problem_1fix.md";
         var mkdocs_page_url = null;
       </script>
 <!--[if lt IE 9]>
@@ -64,6 +64,8 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">3 Waves</a>
 <ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Problem 1</a>
+</li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="#interference-pattern-from-a-hexagonal-array-of-wave-sources">Interference Pattern from a Hexagonal Array of Wave Sources</a>
@@ -72,7 +74,19 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#assumptions-and-parameters">Assumptions and Parameters</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#simulation-and-plotting-2d-3d">Simulation and Plotting (2D + 3D)</a>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-and-plotting-1-source-2-sources-6-sources">Simulation and Plotting (1 Source, 2 Sources, 6 Sources)</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#3d-interference-surface-hexagonal-case">3D Interference Surface (Hexagonal Case)</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_2"></a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#animated-gif-hexagon">Animated GIF (Hexagon)</a>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#observations">Observations</a>
 </li>
@@ -82,23 +96,19 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#frequently-asked-questions-faq">❓ Frequently Asked Questions (FAQ)</a>
 <ul>
-<li class="toctree-l4"><a class="reference internal" href="#why-a-hexagon">❓ Why a hexagon?</a>
+<li class="toctree-l4"><a class="reference internal" href="#why-include-1-and-2-sources">❓ Why include 1 and 2 sources?</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#what-if-i-change-the-polygon">❓ What if I change the polygon?</a>
+<li class="toctree-l4"><a class="reference internal" href="#why-a-hexagon">❓ Why a hexagon?</a>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#can-this-be-animated">❓ Can this be animated?</a>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#are-the-waves-realistic">❓ Are the waves realistic?</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#how-can-i-simulate-noise-or-non-coherence">❓ How can I simulate noise or non-coherence?</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#can-i-use-this-for-sound-or-light">❓ Can I use this for sound or light?</a>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-i-add-non-coherence">❓ How do I add non-coherence?</a>
 </li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../problem_1fix/">Problem 1</a>
 </li>
 </ul>
 </li>
@@ -209,81 +219,108 @@
 <h3 id="motivation">Motivation</h3>
 <p>Visualizing wave interference helps us understand fundamental concepts of physics like:</p>
 <ul>
-<li><strong>Superposition</strong>: Waves add or cancel depending on their relative phase  </li>
-<li><strong>Coherence</strong>: Stable phase relationships are key to recognizable patterns  </li>
-<li><strong>Symmetry in Physics</strong>: The layout of sources creates geometrically rich structures  </li>
+<li><strong>Superposition</strong>: Waves add or cancel depending on their relative phase</li>
+<li><strong>Coherence</strong>: Stable phase relationships are key to recognizable patterns</li>
+<li><strong>Symmetry in Physics</strong>: The layout of sources creates geometrically rich structures</li>
 </ul>
 <p>When wave sources are arranged in a <strong>regular hexagon</strong>, the interference pattern becomes beautifully complex. These types of patterns are not just visually pleasing — they also appear in real-life systems like:</p>
 <ul>
-<li>Speaker arrays  </li>
-<li>Laser beam interference  </li>
-<li>Quantum interference experiments  </li>
-<li>Water ripple tanks in educational settings  </li>
+<li>Speaker arrays</li>
+<li>Laser beam interference</li>
+<li>Quantum interference experiments</li>
+<li>Water ripple tanks in educational settings</li>
 </ul>
 <hr/>
 <h3 id="assumptions-and-parameters">Assumptions and Parameters</h3>
 <ul>
-<li>All sources emit <strong>circular, coherent waves</strong> simultaneously  </li>
-<li>Identical parameters for all sources:  </li>
-<li>Amplitude <span class="arithmatex">\( A = 1.0 \)</span> </li>
-<li>Wavelength <span class="arithmatex">\( \lambda = 1.0 \)</span> </li>
-<li>Frequency <span class="arithmatex">\( f = 1.0 \)</span> </li>
-<li>The layout is a <strong>perfect regular hexagon</strong> </li>
-<li>The simulation is observed at different time steps <span class="arithmatex">\( t \in \{0, 0.25, 0.5, 0.75, 1.0\} \)</span> </li>
-<li>The superposition principle is used:  </li>
+<li>All sources emit <strong>circular, coherent waves</strong> simultaneously</li>
+<li>
+<p>Identical parameters for all sources:</p>
+</li>
+<li>
+<p>Amplitude <span class="arithmatex">\(A = 1.0\)</span></p>
+</li>
+<li>Wavelength <span class="arithmatex">\(\lambda = 1.0\)</span></li>
+<li>Frequency <span class="arithmatex">\(f = 1.0\)</span></li>
+<li>The layout is a <strong>perfect regular hexagon</strong></li>
+<li>The simulation includes comparisons with 1 and 2 sources for clarity</li>
+<li>Observed at time steps <span class="arithmatex">\(t \in \{0, 0.25, 0.5, 0.75, 1.0\}\)</span></li>
+<li>The superposition principle is used:</li>
 </ul>
-<p>[
+<p>$$
   Z(x, y, t) = \sum_{i=1}^{N} A \sin(k r_i - \omega t + \phi)
-  ]</p>
+  $$</p>
 <hr/>
-<h3 id="simulation-and-plotting-2d-3d">Simulation and Plotting (2D + 3D)</h3>
+<h3 id="simulation-and-plotting-1-source-2-sources-6-sources">Simulation and Plotting (1 Source, 2 Sources, 6 Sources)</h3>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
-# Wave Parameters
+from matplotlib import animation
+from IPython.display import Image
+
+# Parameters
 A = 1.0
 wavelength = 1.0
 k = 2 * np.pi / wavelength
 omega = 2 * np.pi
 phi = 0
-
-# Grid Setup
 x = np.linspace(-5, 5, 600)
 y = np.linspace(-5, 5, 600)
 X, Y = np.meshgrid(x, y)
 
-# Generate hexagon sources
+# Source definitions
+def generate_single_source():
+    return [(0, 0)]
+
+def generate_two_sources(sep=4.0):
+    return [(-sep/2, 0), (sep/2, 0)]
+
 def generate_hexagon_sources(radius=2.0):
-    N = 6
-    angles = np.linspace(0, 2 * np.pi, N, endpoint=False)
+    angles = np.linspace(0, 2 * np.pi, 6, endpoint=False)
     return [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
 
-# Plot 2D pattern at different times
-def plot_2d_interference(t, cmap='plasma'):
-    sources = generate_hexagon_sources()
+# 2D Interference Plot
+def plot_2d_interference(t, sources, title_suffix=""):
     Z = np.zeros_like(X)
     for sx, sy in sources:
         r = np.sqrt((X - sx)**2 + (Y - sy)**2)
         Z += A * np.sin(k * r - omega * t + phi)
 
     plt.figure(figsize=(6, 6))
-    plt.contourf(X, Y, Z, levels=150, cmap=cmap)
+    plt.contourf(X, Y, Z, levels=150, cmap='plasma')
     for sx, sy in sources:
         plt.plot(sx, sy, 'ko')
-    plt.title(f'2D Interference Pattern (t = {t:.2f})')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    plt.title(f"2D Interference Pattern {title_suffix} (t = {t:.2f})")
+    plt.xlabel("x")
+    plt.ylabel("y")
     plt.axis('equal')
     plt.colorbar(label='Wave Displacement')
     plt.grid(True)
     plt.show()
 
-# Display multiple snapshots
+# Snapshots for each source layout
 for t_snapshot in [0, 0.25, 0.5, 0.75, 1.0]:
-    plot_2d_interference(t_snapshot)
-
-# Plot 3D Surface
-def plot_3d_interference(t):
-    sources = generate_hexagon_sources()
+    plot_2d_interference(t_snapshot, generate_single_source(), "(1 Source)")
+    plot_2d_interference(t_snapshot, generate_two_sources(), "(2 Sources)")
+    plot_2d_interference(t_snapshot, generate_hexagon_sources(), "(6 Sources)")
+</code></pre>
+<p><img alt="alt text" src="../image-7.png"/></p>
+<p><img alt="alt text" src="../image-8.png"/></p>
+<p><img alt="alt text" src="../image-9.png"/></p>
+<p><img alt="alt text" src="../image-10.png"/></p>
+<p><img alt="alt text" src="../image-11.png"/></p>
+<p><img alt="alt text" src="../image-12.png"/></p>
+<p><img alt="alt text" src="../image-13.png"/></p>
+<p><img alt="alt text" src="../image-14.png"/></p>
+<p><img alt="alt text" src="../image-15.png"/></p>
+<p><img alt="alt text" src="../image-16.png"/></p>
+<p><img alt="alt text" src="../image-17.png"/></p>
+<p><img alt="alt text" src="../image-18.png"/></p>
+<p><img alt="alt text" src="../image-19.png"/></p>
+<p><img alt="alt text" src="../image-20.png"/></p>
+<h2 id="_1"><img alt="alt text" src="../image-21.png"/></h2>
+<h3 id="3d-interference-surface-hexagonal-case">3D Interference Surface (Hexagonal Case)</h3>
+<pre><code class="language-python">def plot_3d_interference(t, sources):
+    from mpl_toolkits.mplot3d import Axes3D
     Z = np.zeros_like(X)
     for sx, sy in sources:
         r = np.sqrt((X - sx)**2 + (Y - sy)**2)
@@ -299,72 +336,99 @@ def plot_3d_interference(t):
     plt.tight_layout()
     plt.show()
 
-# Show 3D plot at t=0
-plot_3d_interference(t=0)
+plot_3d_interference(0, generate_hexagon_sources())
 </code></pre>
-<p><img alt="alt text" src="../image-1.png"/></p>
-<p><img alt="alt text" src="../image-2.png"/></p>
-<p><img alt="alt text" src="../image-3.png"/></p>
-<p><img alt="alt text" src="../image-4.png"/></p>
-<p><img alt="alt text" src="../image-5.png"/></p>
-<p><img alt="alt text" src="../image.png"/></p>
+<h2 id="_2"><img alt="alt text" src="../image-22.png"/></h2>
+<h3 id="animated-gif-hexagon">Animated GIF (Hexagon)</h3>
+<pre><code class="language-python">def create_animation_gif(sources, filename="interference.gif", duration=2.0):
+    fig, ax = plt.subplots(figsize=(6, 6))
+
+    # İlk Z'yi hesapla ve vmin/vmax belirle
+    t0 = 0
+    Z0 = np.zeros_like(X)
+    for sx, sy in sources:
+        r = np.sqrt((X - sx)**2 + (Y - sy)**2)
+        Z0 += A * np.sin(k * r - omega * t0 + phi)
+
+    img = ax.imshow(Z0, cmap='plasma', origin='lower', extent=[-5, 5, -5, 5],
+                    vmin=-len(sources), vmax=len(sources))
+
+    ax.set_title("Interference Animation")
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+
+    def update(frame):
+        t = frame / 20
+        Z = np.zeros_like(X)
+        for sx, sy in sources:
+            r = np.sqrt((X - sx)**2 + (Y - sy)**2)
+            Z += A * np.sin(k * r - omega * t + phi)
+        img.set_data(Z)
+        return [img]
+
+    ani = animation.FuncAnimation(fig, update, frames=40, interval=duration*1000/40, blit=True)
+    ani.save(filename, writer='pillow')
+    plt.close()
+
+create_animation_gif(generate_hexagon_sources())
+ShowImage(filename="interference.gif")
+
+</code></pre>
+<p><img alt="alt text" src="../image-23.png"/></p>
 <hr/>
 <h3 id="observations">Observations</h3>
 <ul>
 <li>
-<p>🟢 <strong>Constructive Interference</strong><br/>
-  Wave crests from different sources align, amplifying the total displacement (bright/elevated zones)</p>
+<p>🟢 <strong>Constructive Interference</strong>
+  Wave crests align, creating bright/elevated zones</p>
 </li>
 <li>
-<p>🔴 <strong>Destructive Interference</strong><br/>
-  Crests and troughs cancel each other, resulting in near-zero displacement (dark/flat regions)</p>
+<p>🔴 <strong>Destructive Interference</strong>
+  Crests and troughs cancel, producing dark/flat regions</p>
 </li>
 <li>
-<p>🔷 <strong>Hexagonal Symmetry</strong><br/>
-  Clear 6-fold symmetry in wavefronts due to regular hexagon layout</p>
+<p>🔷 <strong>Hexagonal Symmetry</strong>
+  The six-source layout reveals rich, six-fold symmetry</p>
 </li>
 <li>
-<p>🔄 <strong>Temporal Dynamics</strong><br/>
-  As time evolves, the interference pattern shifts in space — simulating a breathing effect</p>
+<p>🔄 <strong>Temporal Dynamics</strong>
+  The pattern evolves with time, creating a breathing effect</p>
 </li>
 </ul>
 <hr/>
 <h3 id="conclusion">Conclusion</h3>
-<p>This simulation reveals the beauty and complexity of wave interference created by <strong>coherent sources</strong> arranged in a <strong>hexagonal configuration</strong>.</p>
+<p>This simulation reveals the beauty and complexity of wave interference from <strong>coherent sources</strong> arranged in geometric patterns. By exploring 1, 2, and 6 source cases, we observe how interference builds from simple to complex.</p>
 <h4 id="key-takeaways">Key Takeaways:</h4>
 <ul>
-<li>📐 <strong>Geometry defines interference</strong> — the number and arrangement of sources directly shape the pattern  </li>
-<li>📊 <strong>Wavelength controls fringe spacing</strong> — shorter wavelengths yield denser patterns  </li>
-<li>🧠 <strong>Simple wave rules → complex results</strong> — a powerful concept in many physical systems</li>
+<li>📐 <strong>Geometry defines interference</strong></li>
+<li>📊 <strong>Wavelength controls fringe spacing</strong></li>
+<li>🧠 <strong>Simple wave rules produce complex patterns</strong></li>
 </ul>
 <h4 id="explore-further">Explore Further:</h4>
 <ul>
-<li>Use <strong>triangular</strong>, <strong>square</strong>, or <strong>octagonal</strong> source layouts  </li>
-<li>Introduce <strong>phase differences</strong> to simulate more realistic scenarios  </li>
-<li>Animate wave motion with <code>matplotlib.animation</code> </li>
-<li>Apply this logic to <strong>optics</strong>, <strong>acoustics</strong>, or <strong>quantum mechanics</strong></li>
+<li>Add triangular, square, or circular layouts</li>
+<li>Introduce phase offsets or noise</li>
+<li>Apply to optics, acoustics, or quantum wave interference</li>
 </ul>
 <hr/>
 <h2 id="frequently-asked-questions-faq">❓ Frequently Asked Questions (FAQ)</h2>
+<h3 id="why-include-1-and-2-sources">❓ Why include 1 and 2 sources?</h3>
+<p>To understand wave interference gradually, starting from the simplest case.</p>
 <h3 id="why-a-hexagon">❓ Why a hexagon?</h3>
-<p>Hexagons provide rich symmetry and are seen in many physical systems like crystals and molecular patterns. Their layout creates circularly symmetric interference fringes.</p>
-<h3 id="what-if-i-change-the-polygon">❓ What if I change the polygon?</h3>
-<p>Using a triangle gives simpler results; squares lead to grid-like symmetry. The pattern complexity grows with the number of sides.</p>
+<p>Hexagons offer natural symmetry and occur in crystals, molecular structures, and wave physics.</p>
 <h3 id="can-this-be-animated">❓ Can this be animated?</h3>
-<p>Yes! You can create smooth animations by looping over <code>t</code> and redrawing each frame with <code>matplotlib.animation.FuncAnimation</code>.</p>
+<p>Yes, via <code>matplotlib.animation</code> and <code>pillow</code> for exporting <code>.gif</code>.</p>
 <h3 id="are-the-waves-realistic">❓ Are the waves realistic?</h3>
-<p>This model assumes idealized point sources in an infinite medium with perfect coherence. It demonstrates <strong>concepts</strong>, not specific real-world behavior.</p>
-<h3 id="how-can-i-simulate-noise-or-non-coherence">❓ How can I simulate noise or non-coherence?</h3>
-<p>Introduce random phase offsets or amplitude differences per source.</p>
-<h3 id="can-i-use-this-for-sound-or-light">❓ Can I use this for sound or light?</h3>
-<p>Yes — the math of wave interference applies to <strong>any kind of wave</strong>: sound, light, water, or even probability amplitudes in quantum systems.</p>
+<p>They represent idealized, perfectly coherent sources for conceptual clarity.</p>
+<h3 id="how-do-i-add-non-coherence">❓ How do I add non-coherence?</h3>
+<p>Add random phase differences or amplitude noise to each source.</p>
 <hr/>
-<p><a href="https://colab.research.google.com/drive/1HjFVy4r1IEFeyBXseTmDlUd5sAUiDMwB#scrollTo=QtLG-Pfw7aBt&amp;line=64&amp;uniqifier=1">Visit Colab</a></p>
+<p><a href="https://colab.research.google.com/drive/1HjFVy4r1IEFeyBXseTmDlUd5sAUiDMwB#scrollTo=QtLG-Pfw7aBt">Open in Colab ↗</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../../2%20Gravity/Problem_3/" title="Problem 3"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../problem_1fix/" title="Problem 1">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../Problem_1/" title="Problem 1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../4%20Electromagnetism/Problem_1/" title="Problem 1 (Advanced): Simulating the Effects of the Lorentz Force">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
@@ -379,8 +443,8 @@ plot_3d_interference(t=0)
 </div>
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
-<span><a href="../../2%20Gravity/Problem_3/" style="color: #fcfcfc">« Previous</a></span>
-<span><a href="../problem_1fix/" style="color: #fcfcfc">Next »</a></span>
+<span><a href="../Problem_1/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../4%20Electromagnetism/Problem_1/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../../../js/jquery-3.6.0.min.js"></script>
