@@ -49,7 +49,7 @@ def estimate_pi(num_points):
 ```python
 estimate_pi(10000)
 ```
-
+![alt text](image-21.png)
 ---
 
 ## 📊 Part 1 Analysis – Convergence of Estimation
@@ -71,6 +71,16 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
+
+![alt text](image-22.png)
+![alt text](image-23.png)
+![alt text](image-24.png)
+![alt text](image-25.png)
+![alt text](image-26.png)
+![alt text](image-27.png)
+![alt text](image-28.png)
+![alt text](image-29.png)
+
 
 🧠 **Observation:**
 - The more points we use, the closer we get to the true value of \( \pi \).
@@ -149,6 +159,8 @@ def buffon_needle_simulation(N, L=1.0, D=2.0):
 buffon_needle_simulation(5000)
 ```
 
+![alt text](image-30.png)
+
 ---
 
 ## 📊 Part 2 Analysis – Convergence of Estimation
@@ -167,6 +179,14 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
+
+![alt text](image-31.png)
+![alt text](image-32.png)
+![alt text](image-33.png)
+![alt text](image-34.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
+![alt text](image-37.png)
 
 🧠 **Observation:**
 - Buffon’s method is elegant but **noisier**.
