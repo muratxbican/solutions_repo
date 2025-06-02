@@ -166,3 +166,5 @@ Markdown(f"""
 ## ✅ Conclusion
 
 This classical experiment demonstrates how fundamental constants can be measured using simple apparatus and statistical tools. Despite its simplicity, careful analysis shows how uncertainty impacts our estimate and why precision matters in experimental physics.
+
+[Visit Colab](https://colab.research.google.com/drive/1FRFlRld3iZGAmgj9kG1rY3h1ryBOtBan?usp=sharing)
