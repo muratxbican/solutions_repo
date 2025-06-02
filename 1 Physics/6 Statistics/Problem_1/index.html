@@ -92,11 +92,19 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-1-create-and-summarize-populations">🧪 Step 1: Create and Summarize Populations</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#step-2-sampling-and-distribution-of-sample-means">📈 Step 2: Sampling and Distribution of Sample Means</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#step-3-run-simulations-for-each-population">🔬 Step 3: Run Simulations for Each Population</a>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-simulation-results-by-distribution">🔬 Step 3: Simulation Results by Distribution</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#uniform-distribution">▶️ Uniform Distribution</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#exponential-distribution">▶️ Exponential Distribution</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#binomial-distribution">▶️ Binomial Distribution</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-variance-of-the-sample-mean-vs-sample-size">📉 Step 4: Variance of the Sample Mean vs Sample Size</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#real-world-applications-of-clt">💼 Real-World Applications of CLT</a>
 </li>
@@ -193,122 +201,132 @@
 <div class="section" itemprop="articleBody">
 <h1 id="central-limit-theorem-simulation-visualization-in-python">📊 Central Limit Theorem — Simulation &amp; Visualization in Python</h1>
 <h2 id="objective">🎯 Objective</h2>
-<p>Demonstrate the <strong>Central Limit Theorem (CLT)</strong> through simulations on different population distributions.</p>
+<p>Demonstrate the <strong>Central Limit Theorem (CLT)</strong> through simulations on different population distributions and visualize how the distribution of the sample mean becomes normal as the sample size increases.</p>
 <hr/>
 <h2 id="what-is-the-central-limit-theorem">📖 What is the Central Limit Theorem?</h2>
-<p>The Central Limit Theorem states:</p>
 <blockquote>
-<p>Given a population with any distribution, the sampling distribution of the sample mean approaches a <strong>normal distribution</strong> as the sample size increases.</p>
+<p>The <strong>Central Limit Theorem</strong> (CLT) states:
+Even if a population is not normally distributed, the distribution of the <strong>sample means</strong> tends to be approximately <strong>normal</strong> if the sample size is sufficiently large.</p>
 </blockquote>
-<p>Key points:
-- Works even when the population distribution is non-normal.
-- The larger the sample size, the better the approximation.
-- Standard deviation of sample means:<br/>
-  [\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}]</p>
+<p><strong>Why is this important?</strong>
+- It allows us to apply normal distribution logic in hypothesis testing.
+- It enables confidence interval estimation.
+- It justifies using z-scores and t-scores even when the original data isn't normal.</p>
+<p>📘 <strong>Formula for the standard error (spread of sample means):</strong>
+[ \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} ]</p>
 <hr/>
 <hr/>
 <h2 id="step-1-create-and-summarize-populations">🧪 Step 1: Create and Summarize Populations</h2>
-<p>We will generate populations from three different distributions:</p>
-<ul>
-<li><strong>Uniform Distribution</strong>: Continuous, flat.</li>
-<li><strong>Exponential Distribution</strong>: Right-skewed.</li>
-<li><strong>Binomial Distribution</strong>: Discrete, symmetric.</li>
-</ul>
-<pre><code class="language-python"># Set random seed for reproducibility
-np.random.seed(42)
-
-# Population size
+<p>We generate three populations to simulate:
+- <strong>Uniform Distribution</strong>: Every value between 0 and 1 is equally likely.
+- <strong>Exponential Distribution</strong>: Highly right-skewed, models waiting times.
+- <strong>Binomial Distribution</strong>: Discrete 0 or 1 (like success/failure), here with 10 trials and 0.5 probability.</p>
+<pre><code class="language-python">np.random.seed(42)
 N = 100_000
 
-# Create populations
 uniform_pop = np.random.uniform(0, 1, N)
 exponential_pop = np.random.exponential(scale=1.0, size=N)
 binomial_pop = np.random.binomial(n=10, p=0.5, size=N)
 
-# Print summary statistics
+# Print summary
 print("\U0001F4CA Population Summary:")
-print("\n\u27A1️ Uniform Distribution:")
-print(f"   Mean     : {np.mean(uniform_pop):.3f}")
-print(f"   Variance : {np.var(uniform_pop):.3f}")
+for name, pop in zip(["Uniform", "Exponential", "Binomial"], [uniform_pop, exponential_pop, binomial_pop]):
+    print(f"\n→ {name} Distribution:")
+    print(f"   Mean     : {np.mean(pop):.3f}")
+    print(f"   Variance : {np.var(pop):.3f}")
 
-print("\n\u27A1️ Exponential Distribution:")
-print(f"   Mean     : {np.mean(exponential_pop):.3f}")
-print(f"   Variance : {np.var(exponential_pop):.3f}")
-
-print("\n\u27A1️ Binomial Distribution:")
-print(f"   Mean     : {np.mean(binomial_pop):.3f}")
-print(f"   Variance : {np.var(binomial_pop):.3f}")
-
-# Plot histograms for visual verification
+# Plot histograms of populations
 plt.figure(figsize=(15, 4))
-
-plt.subplot(1, 3, 1)
-plt.hist(uniform_pop, bins=50, color='skyblue')
-plt.title("Uniform")
-
-plt.subplot(1, 3, 2)
-plt.hist(exponential_pop, bins=50, color='lightgreen')
-plt.title("Exponential")
-
-plt.subplot(1, 3, 3)
-plt.hist(binomial_pop, bins=50, color='salmon')
-plt.title("Binomial")
-
+for i, (title, data, color) in enumerate(zip(
+    ["Uniform", "Exponential", "Binomial"],
+    [uniform_pop, exponential_pop, binomial_pop],
+    ['skyblue', 'orange', 'red']
+)):
+    plt.subplot(1, 3, i+1)
+    plt.hist(data, bins=50, color=color)
+    plt.title(f"{title} Distribution")
 plt.tight_layout()
 plt.show()
 </code></pre>
 <p>📊 Population Summary:</p>
-<p>➡️ Uniform Distribution:
+<p>→ Uniform Distribution:
    Mean     : 0.499
    Variance : 0.083</p>
-<p>➡️ Exponential Distribution:
+<p>→ Exponential Distribution:
    Mean     : 1.005
    Variance : 1.008</p>
-<p>➡️ Binomial Distribution:
+<p>→ Binomial Distribution:
    Mean     : 5.004
    Variance : 2.504</p>
-<h2 id="_1"><img alt="alt text" src="../image-1.png"/></h2>
+<p><img alt="alt text" src="../image-16.png"/></p>
+<hr/>
 <h2 id="step-2-sampling-and-distribution-of-sample-means">📈 Step 2: Sampling and Distribution of Sample Means</h2>
-<p>We define a function to:
-- Take multiple samples from a population,
-- Compute the sample means,
-- Plot the distribution of sample means for various sample sizes.</p>
-<pre><code class="language-python">def plot_sampling_distribution(population, dist_name):
+<p>This function:
+- Takes multiple samples from a population
+- Computes the sample means
+- Plots the histogram of the means</p>
+<pre><code class="language-python">def plot_sampling_distribution(population, dist_name, color):
     sample_sizes = [5, 10, 30, 50]
     num_samples = 1000
 
-    for n in sample_sizes:
+    plt.figure(figsize=(12, 8))
+    for i, n in enumerate(sample_sizes):
         sample_means = [
             np.mean(np.random.choice(population, size=n, replace=False))
             for _ in range(num_samples)
         ]
-
-        plt.figure(figsize=(8, 4))
-        sns.histplot(sample_means, kde=True, bins=30, color="cornflowerblue")
-        plt.title(f"{dist_name} — Sample Size {n}", fontsize=14)
+        plt.subplot(2, 2, i+1)
+        sns.histplot(sample_means, kde=True, bins=30, color=color)
+        plt.title(f"{dist_name} — Sample Size {n}", fontsize=12)
         plt.xlabel("Sample Mean")
         plt.ylabel("Frequency")
-        plt.tight_layout()
-        plt.show()
+
+    plt.suptitle(f"CLT Sampling Distribution — {dist_name}", fontsize=16, weight="bold")
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.show()
 </code></pre>
 <hr/>
-<h2 id="step-3-run-simulations-for-each-population">🔬 Step 3: Run Simulations for Each Population</h2>
-<pre><code class="language-python">plot_sampling_distribution(uniform_pop, "Uniform Distribution")
-plot_sampling_distribution(exponential_pop, "Exponential Distribution")
-plot_sampling_distribution(binomial_pop, "Binomial Distribution")
+<h2 id="step-3-simulation-results-by-distribution">🔬 Step 3: Simulation Results by Distribution</h2>
+<h3 id="uniform-distribution">▶️ Uniform Distribution</h3>
+<pre><code class="language-python">plot_sampling_distribution(uniform_pop, "Uniform Distribution", color="skyblue")
 </code></pre>
-<p><img alt="alt text" src="../image-4.png"/>
-<img alt="alt text" src="../image-5.png"/>
-<img alt="alt text" src="../image-6.png"/>
-<img alt="alt text" src="../image-7.png"/>
-<img alt="alt text" src="../image-8.png"/>
-<img alt="alt text" src="../image-9.png"/>
-<img alt="alt text" src="../image-10.png"/>
-<img alt="alt text" src="../image-11.png"/>
-<img alt="alt text" src="../image-12.png"/>
-<img alt="alt text" src="../image-13.png"/>
-<img alt="alt text" src="../image-14.png"/>
-<img alt="alt text" src="../image-15.png"/></p>
+<p><img alt="alt text" src="../image-17.png"/></p>
+<p>📘 <strong>Uniform Distribution:</strong> All values between 0 and 1 are equally likely. The population is flat.</p>
+<p>🧠 <strong>Observation:</strong> Despite the flat shape of the population, the sampling distribution becomes bell-shaped as the sample size increases.</p>
+<hr/>
+<h3 id="exponential-distribution">▶️ Exponential Distribution</h3>
+<pre><code class="language-python">plot_sampling_distribution(exponential_pop, "Exponential Distribution", color="orange")
+</code></pre>
+<p><img alt="alt text" src="../image-18.png"/></p>
+<p>📘 <strong>Exponential Distribution:</strong> Right-skewed, often used to model time between rare events.</p>
+<p>🧠 <strong>Observation:</strong> Initially skewed, but the sampling mean distribution becomes symmetric and normal-looking with larger samples.</p>
+<hr/>
+<h3 id="binomial-distribution">▶️ Binomial Distribution</h3>
+<pre><code class="language-python">plot_sampling_distribution(binomial_pop, "Binomial Distribution", color="red")
+</code></pre>
+<p><img alt="alt text" src="../image-19.png"/></p>
+<p>📘 <strong>Binomial Distribution:</strong> Discrete distribution, modeling the number of successes in a series of Bernoulli trials.</p>
+<p>🧠 <strong>Observation:</strong> Even a discrete distribution like binomial approaches a normal distribution in its sample means.</p>
+<hr/>
+<h2 id="step-4-variance-of-the-sample-mean-vs-sample-size">📉 Step 4: Variance of the Sample Mean vs Sample Size</h2>
+<p>The variance of the sample mean decreases as sample size increases:</p>
+<pre><code class="language-python">sizes = np.arange(1, 101)
+uniform_var = np.var(uniform_pop)
+variances = [uniform_var / n for n in sizes]
+
+plt.figure(figsize=(8,5))
+plt.plot(sizes, variances, label='Var(X̄) = σ²/n', color='green')
+plt.xlabel('Sample Size (n)')
+plt.ylabel('Variance of Sample Mean')
+plt.title('Variance Decreases as Sample Size Increases')
+plt.legend()
+plt.grid(True)
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-20.png"/></p>
+<p>📘 <strong>Key Formula:</strong>
+[ \text{Var}(\bar{X}) = \frac{\sigma^2}{n} ]</p>
+<p>As sample size increases, the <strong>spread</strong> of the sample mean distribution <strong>shrinks</strong>, making estimates more precise.</p>
 <hr/>
 <h2 id="real-world-applications-of-clt">💼 Real-World Applications of CLT</h2>
 <table>
@@ -325,31 +343,35 @@ plot_sampling_distribution(binomial_pop, "Binomial Distribution")
 </tr>
 <tr>
 <td><strong>Quality Control</strong></td>
-<td>Monitor average product dimensions in factories.</td>
+<td>Monitor product consistency in factories.</td>
 </tr>
 <tr>
 <td><strong>Finance</strong></td>
-<td>Forecast average returns of portfolios.</td>
+<td>Predict average portfolio returns.</td>
 </tr>
 <tr>
 <td><strong>Medicine</strong></td>
-<td>Compare treatment effectiveness via patient samples.</td>
+<td>Evaluate treatment effectiveness across sample groups.</td>
+</tr>
+<tr>
+<td><strong>Tech A/B Testing</strong></td>
+<td>Assess conversion rates between web design variations.</td>
 </tr>
 </tbody>
 </table>
 <hr/>
 <h2 id="conclusion">✅ Conclusion</h2>
 <ul>
-<li>The CLT applies across various population shapes: continuous, discrete, skewed.</li>
-<li>The distribution of the <strong>sample mean</strong> becomes <strong>normal</strong> as sample size increases.</li>
-<li>This foundational principle allows us to use <strong>normal-based inference</strong> in most fields.</li>
+<li>CLT is powerful because it works with <strong>any distribution</strong>.</li>
+<li>Larger sample sizes make the sampling distribution <strong>more normal</strong>.</li>
+<li>This is why normal distribution is so common in real data.</li>
 </ul>
 <hr/>
 <h2 id="key-takeaways">🧠 Key Takeaways</h2>
 <ul>
-<li>The <strong>Central Limit Theorem</strong> enables reliable inference from samples.</li>
-<li>With <strong>larger samples</strong>, the <strong>sampling distribution</strong> becomes tighter and more normal.</li>
-<li>This is why the <strong>normal distribution</strong> is central in statistical methods.</li>
+<li>CLT justifies statistical inference in real life.</li>
+<li>Sample size plays a critical role in <strong>normality of sample means</strong>.</li>
+<li>Visualization helps understand abstract statistical laws.</li>
 </ul>
 <hr/>
 </div>
