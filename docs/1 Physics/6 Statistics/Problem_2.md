@@ -210,3 +210,6 @@ plt.show()
 - Monte Carlo simulations are a **powerful tool** in computational mathematics.
 - Randomness can solve deterministic problems with **elegance and insight**.
 - Both circle-based and Buffon’s methods demonstrate convergence to \( \pi \), showcasing geometry + probability.
+
+
+[Visit Colab](https://colab.research.google.com/drive/1iu8yEtjMnFIcXvDFrUn_OyRNpn-Uya1B?usp=sharing)
