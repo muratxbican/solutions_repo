@@ -98,6 +98,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#part-1-analysis-convergence-of-estimation">📊 Part 1 Analysis – Convergence of Estimation</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#part-2-estimating-pi-using-buffons-needle">📌 Part 2: Estimating Pi using Buffon's Needle</a>
@@ -241,7 +243,7 @@ def estimate_pi(num_points):
 <h3 id="example-estimating-pi-with-10000-points">▶️ Example: Estimating Pi with 10,000 points</h3>
 <pre><code class="language-python">estimate_pi(10000)
 </code></pre>
-<hr/>
+<h2 id="_1"><img alt="alt text" src="../image-21.png"/></h2>
 <h2 id="part-1-analysis-convergence-of-estimation">📊 Part 1 Analysis – Convergence of Estimation</h2>
 <p>We now check how the estimate improves with more points.</p>
 <pre><code class="language-python">sample_sizes = [100, 1000, 5000, 10000, 50000, 100000, 500000]
@@ -258,6 +260,14 @@ plt.legend()
 plt.grid(True)
 plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-22.png"/>
+<img alt="alt text" src="../image-23.png"/>
+<img alt="alt text" src="../image-24.png"/>
+<img alt="alt text" src="../image-25.png"/>
+<img alt="alt text" src="../image-26.png"/>
+<img alt="alt text" src="../image-27.png"/>
+<img alt="alt text" src="../image-28.png"/>
+<img alt="alt text" src="../image-29.png"/></p>
 <p>🧠 <strong>Observation:</strong>
 - The more points we use, the closer we get to the true value of <span class="arithmatex">\( \pi \)</span>.
 - However, convergence is <strong>slow</strong> – doubling the number of points gives marginal improvement.</p>
@@ -321,6 +331,7 @@ plt.show()
 <h3 id="example-estimating-pi-with-buffons-needle">▶️ Example: Estimating Pi with Buffon's Needle</h3>
 <pre><code class="language-python">buffon_needle_simulation(5000)
 </code></pre>
+<p><img alt="alt text" src="../image-30.png"/></p>
 <hr/>
 <h2 id="part-2-analysis-convergence-of-estimation">📊 Part 2 Analysis – Convergence of Estimation</h2>
 <pre><code class="language-python">sample_sizes = [100, 500, 1000, 5000, 10000, 20000]
@@ -336,6 +347,13 @@ plt.legend()
 plt.grid(True)
 plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-31.png"/>
+<img alt="alt text" src="../image-32.png"/>
+<img alt="alt text" src="../image-33.png"/>
+<img alt="alt text" src="../image-34.png"/>
+<img alt="alt text" src="../image-35.png"/>
+<img alt="alt text" src="../image-36.png"/>
+<img alt="alt text" src="../image-37.png"/></p>
 <p>🧠 <strong>Observation:</strong>
 - Buffon’s method is elegant but <strong>noisier</strong>.
 - Requires significantly more simulations for stable convergence.</p>
