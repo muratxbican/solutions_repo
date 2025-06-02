@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>📊 Central Limit Theorem — Simulation &amp; Visualization in Python - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "\ud83d\udcca Central Limit Theorem \u2014 Simulation \u0026amp; Visualization in Python";
         var mkdocs_page_input_path = "1 Physics/6 Statistics/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -84,8 +84,26 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">6 Statistics</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">📊 Central Limit Theorem — Simulation &amp; Visualization in Python</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#objective">🎯 Objective</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-central-limit-theorem">📖 What is the Central Limit Theorem?</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-and-summarize-populations">🧪 Step 1: Create and Summarize Populations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-sampling-and-distribution-of-sample-means">📈 Step 2: Sampling and Distribution of Sample Means</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-run-simulations-for-each-population">🔬 Step 3: Run Simulations for Each Population</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#real-world-applications-of-clt">💼 Real-World Applications of CLT</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">✅ Conclusion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-takeaways">🧠 Key Takeaways</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -165,7 +183,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">6 Statistics</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">📊 Central Limit Theorem — Simulation &amp; Visualization in Python</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -173,7 +191,167 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
+<h1 id="central-limit-theorem-simulation-visualization-in-python">📊 Central Limit Theorem — Simulation &amp; Visualization in Python</h1>
+<h2 id="objective">🎯 Objective</h2>
+<p>Demonstrate the <strong>Central Limit Theorem (CLT)</strong> through simulations on different population distributions.</p>
+<hr/>
+<h2 id="what-is-the-central-limit-theorem">📖 What is the Central Limit Theorem?</h2>
+<p>The Central Limit Theorem states:</p>
+<blockquote>
+<p>Given a population with any distribution, the sampling distribution of the sample mean approaches a <strong>normal distribution</strong> as the sample size increases.</p>
+</blockquote>
+<p>Key points:
+- Works even when the population distribution is non-normal.
+- The larger the sample size, the better the approximation.
+- Standard deviation of sample means:<br/>
+  [\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}]</p>
+<hr/>
+<hr/>
+<h2 id="step-1-create-and-summarize-populations">🧪 Step 1: Create and Summarize Populations</h2>
+<p>We will generate populations from three different distributions:</p>
+<ul>
+<li><strong>Uniform Distribution</strong>: Continuous, flat.</li>
+<li><strong>Exponential Distribution</strong>: Right-skewed.</li>
+<li><strong>Binomial Distribution</strong>: Discrete, symmetric.</li>
+</ul>
+<pre><code class="language-python"># Set random seed for reproducibility
+np.random.seed(42)
+
+# Population size
+N = 100_000
+
+# Create populations
+uniform_pop = np.random.uniform(0, 1, N)
+exponential_pop = np.random.exponential(scale=1.0, size=N)
+binomial_pop = np.random.binomial(n=10, p=0.5, size=N)
+
+# Print summary statistics
+print("\U0001F4CA Population Summary:")
+print("\n\u27A1️ Uniform Distribution:")
+print(f"   Mean     : {np.mean(uniform_pop):.3f}")
+print(f"   Variance : {np.var(uniform_pop):.3f}")
+
+print("\n\u27A1️ Exponential Distribution:")
+print(f"   Mean     : {np.mean(exponential_pop):.3f}")
+print(f"   Variance : {np.var(exponential_pop):.3f}")
+
+print("\n\u27A1️ Binomial Distribution:")
+print(f"   Mean     : {np.mean(binomial_pop):.3f}")
+print(f"   Variance : {np.var(binomial_pop):.3f}")
+
+# Plot histograms for visual verification
+plt.figure(figsize=(15, 4))
+
+plt.subplot(1, 3, 1)
+plt.hist(uniform_pop, bins=50, color='skyblue')
+plt.title("Uniform")
+
+plt.subplot(1, 3, 2)
+plt.hist(exponential_pop, bins=50, color='lightgreen')
+plt.title("Exponential")
+
+plt.subplot(1, 3, 3)
+plt.hist(binomial_pop, bins=50, color='salmon')
+plt.title("Binomial")
+
+plt.tight_layout()
+plt.show()
+</code></pre>
+<p>📊 Population Summary:</p>
+<p>➡️ Uniform Distribution:
+   Mean     : 0.499
+   Variance : 0.083</p>
+<p>➡️ Exponential Distribution:
+   Mean     : 1.005
+   Variance : 1.008</p>
+<p>➡️ Binomial Distribution:
+   Mean     : 5.004
+   Variance : 2.504</p>
+<h2 id="_1"><img alt="alt text" src="../image-1.png"/></h2>
+<h2 id="step-2-sampling-and-distribution-of-sample-means">📈 Step 2: Sampling and Distribution of Sample Means</h2>
+<p>We define a function to:
+- Take multiple samples from a population,
+- Compute the sample means,
+- Plot the distribution of sample means for various sample sizes.</p>
+<pre><code class="language-python">def plot_sampling_distribution(population, dist_name):
+    sample_sizes = [5, 10, 30, 50]
+    num_samples = 1000
+
+    for n in sample_sizes:
+        sample_means = [
+            np.mean(np.random.choice(population, size=n, replace=False))
+            for _ in range(num_samples)
+        ]
+
+        plt.figure(figsize=(8, 4))
+        sns.histplot(sample_means, kde=True, bins=30, color="cornflowerblue")
+        plt.title(f"{dist_name} — Sample Size {n}", fontsize=14)
+        plt.xlabel("Sample Mean")
+        plt.ylabel("Frequency")
+        plt.tight_layout()
+        plt.show()
+</code></pre>
+<hr/>
+<h2 id="step-3-run-simulations-for-each-population">🔬 Step 3: Run Simulations for Each Population</h2>
+<pre><code class="language-python">plot_sampling_distribution(uniform_pop, "Uniform Distribution")
+plot_sampling_distribution(exponential_pop, "Exponential Distribution")
+plot_sampling_distribution(binomial_pop, "Binomial Distribution")
+</code></pre>
+<p><img alt="alt text" src="../image-4.png"/>
+<img alt="alt text" src="../image-5.png"/>
+<img alt="alt text" src="../image-6.png"/>
+<img alt="alt text" src="../image-7.png"/>
+<img alt="alt text" src="../image-8.png"/>
+<img alt="alt text" src="../image-9.png"/>
+<img alt="alt text" src="../image-10.png"/>
+<img alt="alt text" src="../image-11.png"/>
+<img alt="alt text" src="../image-12.png"/>
+<img alt="alt text" src="../image-13.png"/>
+<img alt="alt text" src="../image-14.png"/>
+<img alt="alt text" src="../image-15.png"/></p>
+<hr/>
+<h2 id="real-world-applications-of-clt">💼 Real-World Applications of CLT</h2>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Polling</strong></td>
+<td>Estimate election results from survey samples.</td>
+</tr>
+<tr>
+<td><strong>Quality Control</strong></td>
+<td>Monitor average product dimensions in factories.</td>
+</tr>
+<tr>
+<td><strong>Finance</strong></td>
+<td>Forecast average returns of portfolios.</td>
+</tr>
+<tr>
+<td><strong>Medicine</strong></td>
+<td>Compare treatment effectiveness via patient samples.</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="conclusion">✅ Conclusion</h2>
+<ul>
+<li>The CLT applies across various population shapes: continuous, discrete, skewed.</li>
+<li>The distribution of the <strong>sample mean</strong> becomes <strong>normal</strong> as sample size increases.</li>
+<li>This foundational principle allows us to use <strong>normal-based inference</strong> in most fields.</li>
+</ul>
+<hr/>
+<h2 id="key-takeaways">🧠 Key Takeaways</h2>
+<ul>
+<li>The <strong>Central Limit Theorem</strong> enables reliable inference from samples.</li>
+<li>With <strong>larger samples</strong>, the <strong>sampling distribution</strong> becomes tighter and more normal.</li>
+<li>This is why the <strong>normal distribution</strong> is central in statistical methods.</li>
+</ul>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
