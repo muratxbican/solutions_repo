@@ -206,3 +206,5 @@ As sample size increases, the **spread** of the sample mean distribution **shrin
 - Visualization helps understand abstract statistical laws.
 
 ---
+
+[Visit Colab](https://colab.research.google.com/drive/1AqZp6He27r2g35L7x-La4TO19ZyJtbpP?usp=sharing)
