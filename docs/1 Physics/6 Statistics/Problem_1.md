@@ -17,7 +17,11 @@ Demonstrate the **Central Limit Theorem (CLT)** through simulations on different
 - It justifies using z-scores and t-scores even when the original data isn't normal.
 
 📘 **Formula for the standard error (spread of sample means):**
-\[ \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} \]
+
+$$
+\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}
+$$
+
 
 ---
 
