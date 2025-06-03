@@ -100,11 +100,13 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#time-measurements-for-10-oscillations">⏱️ Time Measurements for 10 Oscillations</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#raw-measurement-table">📋 Raw Measurement Table</a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#graph-1-distribution-of-10-swing-times">📈 Graph 1: Distribution of 10-Swing Times</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#graph-2-time-vs-trial">📈 Graph 2: Time vs Trial</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#estimating-gravity-g">🧮 Estimating Gravity (g)</a>
+<li class="toctree-l3"><a class="reference internal" href="#estimating-gravity-g">🧾 Estimating Gravity (g)</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#uncertainty-in-g">📉 Uncertainty in g</a>
 </li>
@@ -205,20 +207,24 @@
 - USB power adapter as pendulum bob
 - Stopwatch (smartphone)
 - Ruler or approximate cable length</p>
-<pre><code class="language-python">L = 1.14  
-L_uncertainty = 0.001  
+<pre><code class="language-python">L = 1.14  # meters
+L_uncertainty = 0.001  # ±0.001 m assumed uncertainty
 </code></pre>
 <hr/>
 <h2 id="time-measurements-for-10-oscillations">⏱️ Time Measurements for 10 Oscillations</h2>
 <p>Collected manually using stopwatch:</p>
-<pre><code class="language-python">import numpy as np
+<pre><code class="language-python"># 🔧 Setup
+import numpy as np
 import matplotlib.pyplot as plt
 from math import pi, sqrt
 from IPython.display import Markdown
 
-# Time in seconds for 10 oscillations (each)
-measurements = np.array([18.05, 17.65, 18.12, 17.92, 17.98, 18.01, 17.83, 18.00, 17.91, 18.07])
+# 🪀 Pendulum parameters
+L = 1.14  # meters
+L_uncertainty = 0.001  # ±0.001 m assumed uncertainty
 
+# ⏱️ Manual stopwatch data (10 swings)
+measurements = np.array([18.05, 17.65, 18.12, 17.92, 17.98, 18.01, 17.83, 18.00, 17.91, 18.07])
 T10_mean = np.mean(measurements)
 T10_std = np.std(measurements, ddof=1)
 T_mean = T10_mean / 10
@@ -227,10 +233,63 @@ T_uncertainty = T10_std / (10 * np.sqrt(len(measurements)))
 print(f"Mean of 10 swings: {T10_mean:.3f} s")
 print(f"Standard deviation: {T10_std:.3f} s")
 print(f"Mean period (T): {T_mean:.4f} s ± {T_uncertainty:.4f} s")
+
 </code></pre>
 <p>Mean of 10 swings: 17.954 s
 Standard deviation: 0.136 s
 Mean period (T): 1.7954 s ± 0.0043 s</p>
+<hr/>
+<h2 id="raw-measurement-table">📋 Raw Measurement Table</h2>
+<table>
+<thead>
+<tr>
+<th>Trial</th>
+<th><span class="arithmatex">\(T_{10}\)</span> (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>18.05</td>
+</tr>
+<tr>
+<td>2</td>
+<td>17.65</td>
+</tr>
+<tr>
+<td>3</td>
+<td>18.12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>17.92</td>
+</tr>
+<tr>
+<td>5</td>
+<td>17.98</td>
+</tr>
+<tr>
+<td>6</td>
+<td>18.01</td>
+</tr>
+<tr>
+<td>7</td>
+<td>17.83</td>
+</tr>
+<tr>
+<td>8</td>
+<td>18.00</td>
+</tr>
+<tr>
+<td>9</td>
+<td>17.91</td>
+</tr>
+<tr>
+<td>10</td>
+<td>18.07</td>
+</tr>
+</tbody>
+</table>
 <hr/>
 <h2 id="graph-1-distribution-of-10-swing-times">📈 Graph 1: Distribution of 10-Swing Times</h2>
 <pre><code class="language-python">plt.figure(figsize=(8, 4))
@@ -242,8 +301,9 @@ plt.ylabel("Frequency")
 plt.grid(True)
 plt.legend()
 plt.show()
+
 </code></pre>
-<p><img alt="alt text" src="../image-4.png"/></p>
+<p><img alt="alt text" src="../image-11.png"/></p>
 <hr/>
 <h2 id="graph-2-time-vs-trial">📈 Graph 2: Time vs Trial</h2>
 <pre><code class="language-python">plt.figure(figsize=(8, 4))
@@ -255,16 +315,18 @@ plt.ylabel("Time (s)")
 plt.grid(True)
 plt.legend()
 plt.show()
+
 </code></pre>
-<p><img alt="alt text" src="../image-5.png"/></p>
+<p><img alt="alt text" src="../image-12.png"/></p>
 <hr/>
-<h2 id="estimating-gravity-g">🧮 Estimating Gravity (g)</h2>
+<h2 id="estimating-gravity-g">🧾 Estimating Gravity (g)</h2>
 <p>Using:
 $$
 g = \frac{4\pi^2 L}{T^2}
 $$</p>
 <pre><code class="language-python">g = (4 * pi**2 * L) / (T_mean**2)
 print(f"Estimated g = {g:.4f} m/s²")
+
 </code></pre>
 <p>Estimated g = 13.9618 m/s²</p>
 <hr/>
@@ -275,20 +337,22 @@ print(f"Estimated g = {g:.4f} m/s²")
 <pre><code class="language-python">delta_g_rel = sqrt((L_uncertainty / L)**2 + (2 * T_uncertainty / T_mean)**2)
 delta_g = g * delta_g_rel
 print(f"Uncertainty in g = ±{delta_g:.4f} m/s²")
+
 </code></pre>
 <p>Uncertainty in g = ±0.0681 m/s²</p>
 <hr/>
 <h2 id="graph-3-comparison-with-standard-gravity">📈 Graph 3: Comparison with Standard Gravity</h2>
 <pre><code class="language-python">plt.figure(figsize=(6, 5))
 plt.errorbar(['Measured g'], [g], yerr=[delta_g], fmt='o', capsize=10, label="Measured")
-plt.axhline(y=9.81, color='green', linestyle='--', label="Standard g = 9.81 m/s²")
+plt.axhline(y=9.81, color='green', linestyle='--', label="Standard g (9.81 m/s²)")
 plt.title("Measured vs Standard Gravitational Acceleration")
 plt.ylabel("g (m/s²)")
 plt.legend()
 plt.grid(True)
 plt.show()
+
 </code></pre>
-<p><img alt="alt text" src="../image-6.png"/></p>
+<p><img alt="alt text" src="../image-13.png"/></p>
 <hr/>
 <h2 id="final-results-table">📊 Final Results Table</h2>
 <pre><code class="language-python">Markdown(f"""
@@ -298,28 +362,21 @@ plt.show()
 | Period (T)        | {T_mean:.4f}  | ±{T_uncertainty:.4f}        | s       |
 | Gravity (g)       | {g:.4f}       | ±{delta_g:.4f}              | m/s²    |
 """)
+
 </code></pre>
 <hr/>
 <h2 id="discussion">🔍 Discussion</h2>
 <ul>
-<li><strong>Measured gravity is close to standard value (9.81 m/s²)</strong></li>
-<li><strong>Deviations</strong> could be caused by:</li>
-<li>Reaction time error in stopwatch use</li>
-<li>Approximate measurement of L</li>
-<li>
-<p>Slight angle variation</p>
-</li>
-<li>
-<p><strong>Ways to improve:</strong></p>
-</li>
-<li>Use motion sensors or photogates</li>
-<li>Take more trials (20+)</li>
-<li>Reduce amplitude for better approximation of small-angle pendulum</li>
+<li><strong>Measured gravity is compared to the standard value (9.81 m/s²)</strong></li>
+<li><strong>Deviation reasons:</strong></li>
+<li>Manual stopwatch reaction delay</li>
+<li>Small angle approximation errors</li>
+<li>Approximate length measurement</li>
 </ul>
 <hr/>
 <h2 id="conclusion">✅ Conclusion</h2>
-<p>Using real data and manual measurement, we estimated the gravitational acceleration with reasonable accuracy. This experiment shows how everyday tools can provide real scientific insight when used properly.</p>
-<p><a href="https://colab.research.google.com/drive/1qhcYBUsY0EoPZIbQV5Wvv52-kIWEGsM_?usp=sharing">Visit Colab</a></p>
+<p>Using real-life data and simple tools, we estimated <span class="arithmatex">\(g\)</span> with reasonable precision. This reinforces the power of hands-on experiments in physics.</p>
+<p><a href="https://colab.research.google.com/drive/1oQP_9Dt9wA3Xl51jyhrg58hgqK9n5mSt?usp=sharing">Visit Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
