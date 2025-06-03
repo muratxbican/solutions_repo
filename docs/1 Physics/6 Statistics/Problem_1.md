@@ -173,7 +173,11 @@ plt.show()
 ![alt text](image-20.png)
 
 📘 **Key Formula:**
-\[ \text{Var}(\bar{X}) = \frac{\sigma^2}{n} \]
+
+$$
+\text{Var}(\bar{X}) = \frac{\sigma^2}{n}
+$$
+
 
 As sample size increases, the **spread** of the sample mean distribution **shrinks**, making estimates more precise.
 
